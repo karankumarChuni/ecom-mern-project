@@ -132,7 +132,7 @@ const Home = () => {
       >
         <img
         onClick={()=>{window.location.href = item.banner_link}}
-          src= {item.banner}
+          src= {item.banner?.url}
           // src={`http://localhost:8000/uploads/images/${item.banner}`}
           alt={`banner-${index}`}
           className="img-fluid mainbanner bg-img"

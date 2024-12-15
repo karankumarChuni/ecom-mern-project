@@ -26,10 +26,14 @@ var bannerSchema = new mongoose.Schema({
         type: String,
         default:"Active",
       },
-    banner:{
-        type:String,
-        default:null
-    },
+    banner: {
+        public_id: String,
+        url: String
+    }
+    // banner:{
+    //     type:String,
+    //     default:null
+    // }
 },{timestamps:true});
 
 //Export the model

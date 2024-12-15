@@ -9,6 +9,7 @@ import { Productvalidation } from "../Validation/Productvalidation";
 import { useGetLevelOneCategoryQuery, usePostFetchSubCategoryMutation} from "../../../store/api/categoryapi";
 import { usePostProductMutation } from "../../../store/api/productapi";
 import { useGetAttributeByCategoryIdQuery } from "../../../store/api/attributeapi";
+import { isDevelopment } from "../../../utils";
 const Addproductform = () => {
   const [subcategories, setsubcategories] = useState([]);
   const [categoryid, setcategoryid] = useState([]);
@@ -81,32 +82,31 @@ const deleteItem = (name, value, totaldata) => {
   const { data:attributedata, isLoading } = useGetAttributeByCategoryIdQuery(!subcategoryid[0] ? !categoryid[0] ? 0 : categoryid[0] : subcategoryid[0]);
   // fetch Attribute api end here
 
-
   return (
     <div className="container-fuild pb-4 pt-3 px-2 bg-white">
       <Formik
         initialValues={{
-          product_name: "",
-          product_url: "",
-          selling_price: "",
-          mrp_price: "",
-          stock: "",
-          weight: "",
-          weight_type: "",
-          sort_description: "",
-          meta_title: "",
-          meta_description: "",
-          meta_keywords: "",
-          editor: "",
-          brand: "",
-          color: "",
-          size: "",
+          product_name: isDevelopment ? "product-1" :  "",
+          product_url: isDevelopment ? "product-1" :  "",
+          selling_price: isDevelopment ? "6000" :  "",
+          mrp_price: isDevelopment ? "2000" :  "",
+          stock: isDevelopment ? "30" :  "",
+          weight: isDevelopment ? "300" :  "",
+          weight_type: isDevelopment ? "" :  "",
+          sort_description: isDevelopment ? "product-1" :  "",
+          meta_title: isDevelopment ? "product-1" :  "",
+          meta_description: isDevelopment ? "product-1 description" :  "",
+          meta_keywords: isDevelopment ? "product-1 product-1 description" :  "",
+          editor: isDevelopment ? "product-1" :  "",
+          brand: isDevelopment ? "Levi" :  "",
+          color: isDevelopment ? "white" :  "",
+          size: isDevelopment ? "200" :  "",
           parent_category: [],
           child_category: [],
-          status: "",
-          trendingproduct: "",
-          newarrivedproduct: "",
-          featuredproduct: "",
+          status: isDevelopment ? "Active" :  "",
+          trendingproduct: isDevelopment ? "Active" :  "",
+          newarrivedproduct: isDevelopment ? "Active" :  "",
+          featuredproduct: isDevelopment ? "Active" :  "",
           // attribute:[],
           product_image1: null,
           product_image2: null,

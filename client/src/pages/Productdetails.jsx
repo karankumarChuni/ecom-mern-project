@@ -394,10 +394,10 @@ if(isLoading === false){
                               className="shirt"
                             >
                               <img
-                                src={`${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`}
+                                src={Data23?.[showoption]?.product_image1}
                                 onClick={() => {
                                   setviewimg(
-                                    `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                    Data23?.[showoption]?.product_image1
                                   );
                                 }}
                                 alt
@@ -411,10 +411,10 @@ if(isLoading === false){
                                 className="shirt2"
                               >
                                 <img
-                                  src={`${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image2}`}
+                                  src={Data23?.[showoption]?.product_image2}
                                   onClick={() => {
                                     setviewimg(
-                                      `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image2}`
+                                      Data23?.[showoption]?.product_image2
                                     );
                                   }}
                                   alt
@@ -431,10 +431,10 @@ if(isLoading === false){
                                 className="shirt3"
                               >
                                 <img
-                                  src={`${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image3}`}
+                                  src={Data23?.[showoption]?.product_image3}
                                   onClick={() => {
                                     setviewimg(
-                                      `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image3}`
+                                      Data23?.[showoption]?.product_image3
                                     );
                                   }}
                                   alt
@@ -451,10 +451,10 @@ if(isLoading === false){
                                 className="shirt4"
                               >
                                 <img
-                                  src={`${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image4}`}
+                                  src={Data23?.[showoption]?.product_image4}
                                   onClick={() => {
                                     setviewimg(
-                                      `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image4}`
+                                      Data23?.[showoption]?.product_image4
                                     );
                                   }}
                                   alt
@@ -477,7 +477,7 @@ if(isLoading === false){
                                     isFluidWidth: true,
                                     src:
                                       viewimg === null
-                                        ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                        ? Data23?.[showoption]?.product_image1
                                         : viewimg,
                                     width: 140,
                                     height: 600,
@@ -485,7 +485,7 @@ if(isLoading === false){
                                   largeImage: {
                                     src:
                                       viewimg === null
-                                        ? `${process.env.REACT_APP_API_IMAGE_URL}${Data23?.[showoption]?.product_image1}`
+                                        ? Data23?.[showoption]?.product_image1
                                         : viewimg,
                                     width: 836,
                                     height: 1100,

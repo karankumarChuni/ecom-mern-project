@@ -12,6 +12,8 @@ const createbanner = async (req, res) => {
 
     console.log('rq.file?', userHasUploadedAvatarImage)
     let url
+    let public_id
+    
     if (userHasUploadedAvatarImage) {
       const file =  req.files.banner[0] // type `any` is necessary to fix eslint error
       myCloud = await cloudinary.v2.uploader.upload(file.path, {
@@ -20,7 +22,7 @@ const createbanner = async (req, res) => {
         // crop: 'scale',
         resource_type: 'image',
       })
-      const public_id = myCloud?.public_id
+      public_id = myCloud?.public_id
       url = myCloud?.secure_url
       console.log('url?', url)
       // delete temporary uploaded files
@@ -35,7 +37,10 @@ const createbanner = async (req, res) => {
       banner_type,
       banner_link,
       banner_alt,
-      banner: url,
+      banner: {
+        url: url,
+        public_id: public_id,
+      }
     });
     const data = await addbanner.save();
     res.status(201).json({ status: "successfull", data });
