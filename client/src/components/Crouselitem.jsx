@@ -9,7 +9,7 @@ const Crouselitem = ({item}) => {
                 <div className="product-imgbox">
                   <div className="product-front">
                     <a href="javascript:void(0)">
-                    <img src={`http://localhost:8000/uploads/images/${item.product_image1}`} alt="" />
+                    <img src={item.product_image1} alt="" />
                     </a>
                   </div>
 

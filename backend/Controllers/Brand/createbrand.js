@@ -1,5 +1,7 @@
 const brand = require("../../Models/brand");
 const createbrand = async (req, res) => {
+
+  
   try {
     const {brand_name,description,status } = req.body;
     const createbrand = new brand({

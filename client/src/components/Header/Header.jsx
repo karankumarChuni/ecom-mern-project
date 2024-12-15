@@ -161,7 +161,7 @@ refetch()
                     <li>  
                       <div className="p-1 d-flex" style={{gap:"10px",cursor:'pointer'}} onClick={()=>{transfer(item._id,item.title)}} >
                         <div className="imagecontain" style={{width:'47%'}}>
-                        <img src={`http://localhost:8000/uploads/images/${item.product_image1}`} style={{width:'100%',height:'100%'}} className="img-fluid  " alt="product" />
+                        <img src={item.product_image1} style={{width:'100%',height:'100%'}} className="img-fluid  " alt="product" />
                         </div>
                         <div className="cartinfo">
                          <h6 style={{fontSize:'12px',color:'#059fe2',fontWeight:'600',padding:'3px 0px'}}>{item.product_name}</h6>

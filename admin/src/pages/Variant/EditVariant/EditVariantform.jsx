@@ -508,7 +508,7 @@ const EditVariantform = ({ id }) => {
                         <img
                           src={
                             values.product_image1 === data.data.product_image1
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image1}`
+                              ? data.data.product_image1
                               : URL.createObjectURL(values.product_image1)
                           }
                           alt="zxcvbnm"
@@ -561,7 +561,7 @@ const EditVariantform = ({ id }) => {
                         <img
                           src={
                             values.product_image2 === data.data.product_image2
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image2}`
+                              ? data.data.product_image2
                               : URL.createObjectURL(values.product_image2)
                           }
                           alt="zxcvbnm"
@@ -614,7 +614,7 @@ const EditVariantform = ({ id }) => {
                         <img
                           src={
                             values.product_image3 === data.data.product_image3
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image3}`
+                              ? data.data.product_image3
                               : URL.createObjectURL(values.product_image3)
                           }
                           alt="zxcvbnm"
@@ -667,7 +667,7 @@ const EditVariantform = ({ id }) => {
                         <img
                           src={
                             values.product_image4 === data.data.product_image4
-                              ? `http://localhost:8000/uploads/images/${data.data.product_image4}`
+                              ?data.data.product_image4
                               : URL.createObjectURL(values.product_image4)
                           }
                           alt="zxcvbnm"

@@ -352,7 +352,7 @@ const Webinfoform = () => {
                         <img
                           src={
                             values.logo === data.data[0].logo
-                              ? `http://localhost:8000/uploads/images/${data.data[0].logo}`
+                              ? data.data[0].logo
                               : URL.createObjectURL(values.logo)
                           }
                           alt="zxcvbnm"

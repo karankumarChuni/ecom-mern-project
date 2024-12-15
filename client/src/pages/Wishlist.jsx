@@ -114,13 +114,13 @@ const Wishlist = () => {
                                         >
                                           {" "}
                                           <img
-                                            src={`http://localhost:8000/uploads/images/${
+                                            src={
                                               item.product_id != null
                                                 ? item?.product_id
                                                     .product_image1
                                                 : item?.product_variant_id
                                                     .product_image1
-                                            }`}
+                                            }
                                             onClick={() => {
                                               transfer(
                                                 item.product_id === null

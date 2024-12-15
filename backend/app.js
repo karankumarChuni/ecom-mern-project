@@ -19,8 +19,11 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const app = express();
 const path = require('path');
+const cloudinary = require('cloudinary');
+
 app.use(cors())
 const connectdb = require("./db/connection.js");
+const { log } = require("console");
 require("./Models/contactus");
 require("./Models/category");
 require("./Models/attribute");
@@ -31,10 +34,17 @@ require("./Models/wishlist");
 require("./Models/brand");
 require("./Models/address");
 require("./Models/order");
+
 const port = process.env.PORT || 8000;
 const database = process.env.MONGO_URI || "";
 mongoose.set('strictQuery', false);
 connectdb(database);
+
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -59,3 +69,4 @@ app.use("/api/order",orderrouter);
 app.listen(port, () => {
   console.log(`server is runing at ${port}`);
 });
+

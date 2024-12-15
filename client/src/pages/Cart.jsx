@@ -116,11 +116,11 @@ const Cart = () => {
                             >
                               <div style={{ padding: "10px" }}>
                                 <img
-                                  src={`http://localhost:8000/uploads/images/${
+                                  src={
                                     item.product_id === null
                                       ? item.product_variant_id.product_image1
                                       : item.product_id.product_image1
-                                  }`}
+                                  }
                                   width="120px"
                                   Height="170px"
                                   alt="cart"
@@ -356,11 +356,11 @@ const Cart = () => {
                             }}
                           >
                             <img
-                              src={`http://localhost:8000/uploads/images/${
+                              src={
                                 item.product_id === null
                                   ? item.product_variant_id.product_image1
                                   : item.product_id.product_image1
-                              }`}
+                              }
                               width="80px"
                               height="80px"
                               alt="cart"

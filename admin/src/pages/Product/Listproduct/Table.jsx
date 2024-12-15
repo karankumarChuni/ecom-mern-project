@@ -33,7 +33,7 @@ const Table = () => {
       flex: 1,
       renderCell: ({ row: { product_image1 } }) => {
         return (
-         <img src={`http://localhost:8000/uploads/images/${product_image1}`} width="56%" height="60%" alt="product" />
+         <img src={product_image1} width="56%" height="60%" alt="product" />
         );
       },
     },

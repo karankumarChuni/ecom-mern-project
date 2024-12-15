@@ -1048,7 +1048,7 @@ useEffect(()=>{
                                         >
                                           {" "}
                                           <img
-                                            src={`http://localhost:8000/uploads/images/${item?.product_image1}`}
+                                            src={item?.product_image1}
                                             className="img-fluid  "
                                             alt="product"
                                           />{" "}

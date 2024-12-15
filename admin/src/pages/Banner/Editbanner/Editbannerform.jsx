@@ -228,7 +228,7 @@ const Editbannerform = ({ id }) => {
                         <img
                           src={
                             values.banner === data.data.banner
-                              ? `http://localhost:8000/uploads/images/${data.data.banner}`
+                              ? data.data.banner
                               : URL.createObjectURL(values.banner)
                           }
                           alt="zxcvbnm"
