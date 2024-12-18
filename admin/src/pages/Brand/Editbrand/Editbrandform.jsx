@@ -3,7 +3,11 @@ import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from "jodit-react";
 import { Field, Form, Formik } from "formik";
-import { useGetAllBrandNameQuery, useGetSingleBrandQuery, usePatchBrandMutation } from "../../../store/api/brandapi";
+import {
+  useGetAllBrandNameQuery,
+  useGetSingleBrandQuery,
+  usePatchBrandMutation,
+} from "../../../store/api/brandapi";
 import { Brandvalidation } from "../Validation/Brandvalidation";
 const Editbrandform = ({ id }) => {
   const { data, isLoading } = useGetSingleBrandQuery(id);
@@ -11,7 +15,9 @@ const Editbrandform = ({ id }) => {
   const [apiresponse, setapiresponse] = useState({});
   const imageInputRef = useRef(null);
   const nvg = useNavigate();
-  const {data:brandname,isLoading:brandnameloading} = useGetAllBrandNameQuery()
+  const { data: brandname, isLoading: brandnameloading } =
+    useGetAllBrandNameQuery();
+  console.log("all brands", brandname);
   const config = {
     height: "300px",
   };
@@ -67,19 +73,24 @@ const Editbrandform = ({ id }) => {
                 position: "relative",
               }}
             >
-
               <div className="col-md-6 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-4">
                     <label htmlFor="" className="form-label">
-                    Brand Name <span style={{ color: "red" }}>*</span>
+                      Brand Name <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-lg-8">
-                    <Field as="select" name="banner_type" className="form-select">
-                      {brandnameloading === true ? "" : brandname.data.map((item)=>(
-                      <option value={item}>{item}</option>
-                      ))}
+                    <Field
+                      as="select"
+                      name="banner_type"
+                      className="form-select"
+                    >
+                      {brandnameloading === true
+                        ? ""
+                        : brandname.data.map((item) => (
+                            <option value={item}>{item}</option>
+                          ))}
                     </Field>
                   </div>
                   <div className="offset-lg-4 col-lg-8">
@@ -113,12 +124,11 @@ const Editbrandform = ({ id }) => {
                 </div>
               </div>
 
-
               <div className="col-12 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
-                    <label htmlFor="" className="form-label ">
-                      Image <span style={{ color: "red" }}>*</span>{" "}
+                    <label htmlFor="" className="form-label">
+                      Image <span style={{ color: "red" }}>*</span>
                     </label>
                   </div>
                   <div className="col-12">
@@ -145,11 +155,12 @@ const Editbrandform = ({ id }) => {
                         />
                         <img
                           src={
-                            values.banner === data.data.brand_image
-                              ? data.data.brand_image
-                              : URL.createObjectURL(values.banner)
+                            values.banner instanceof File
+                              ? URL.createObjectURL(values.banner)
+                              : data.data.brand_image?.url ||
+                                data.data.brand_image
                           }
-                          alt="zxcvbnm"
+                          alt="Brand Banner"
                           width="100%"
                           height="200px"
                           onClick={() => {
@@ -172,15 +183,16 @@ const Editbrandform = ({ id }) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label ">
-                      Brand Description{" "}
-                      <span style={{ color: "red" }}>*</span>{" "}
+                      Brand Description <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
                     <JoditEditor
                       config={config}
                       value={values.description}
-                      onChange={(content) => setFieldValue("description", content)}
+                      onChange={(content) =>
+                        setFieldValue("description", content)
+                      }
                     />
                   </div>
                   <div className="col-lg-12">

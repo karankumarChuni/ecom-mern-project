@@ -41,7 +41,7 @@ const Brandlist = () => {
               <div></div>
             )}
             <div className="col-lg-3 d-flex justify-content-between">
-              <p className="m-0 customfont">Banner List</p>
+              <p className="m-0 customfont">Brands List</p>
               <div className="addnew d-lg-none d-block mb-2">
                 <button className="btn text-white customcolor2">
                   <NavLink

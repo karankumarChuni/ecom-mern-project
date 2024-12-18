@@ -11,25 +11,41 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     product_image1: {
-      type: String,
-      required: true,
-      default: null,
+      url: String,
+      public_id: String
     },
     product_image2: {
-      type: String,
-      required: true,
-      default: null,
+      url: String,
+      public_id: String
     },
     product_image3: {
-      type: String,
-      required: true,
-      default: null,
+      url: String,
+      public_id: String
     },
     product_image4: {
-      type: String,
-      required: true,
-      default: null,
+      url: String,
+      public_id: String
     },
+    // product_image1: {
+    //   type: String,
+    //   required: true,
+    //   default: null,
+    // },
+    // product_image2: {
+    //   type: String,
+    //   required: true,
+    //   default: null,
+    // },
+    // product_image3: {
+    //   type: String,
+    //   required: true,
+    //   default: null,
+    // },
+    // product_image4: {
+    //   type: String,
+    //   required: true,
+    //   default: null,
+    // },
     brand: {
       type: String,
       // required: true,

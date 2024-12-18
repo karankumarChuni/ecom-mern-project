@@ -879,11 +879,11 @@ const EditProductform = ({ id }) => {
                 </div>
               </div>
 
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Brand <span style={{ color: "red" }}>*</span>{" "}
+                      Brand <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -902,11 +902,11 @@ const EditProductform = ({ id }) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Color <span style={{ color: "red" }}>*</span>{" "}
+                      Color <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -925,11 +925,11 @@ const EditProductform = ({ id }) => {
                   </div>
                 </div>
               </div>
-              <div style={{width:"19.866667%"}} className="col-2 px-2 pt-3">
+              <div style={{ width: "19.866667%" }} className="col-2 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
                     <label htmlFor="" className="form-label">
-                    Size <span style={{ color: "red" }}>*</span>{" "}
+                      Size <span style={{ color: "red" }}>*</span>{" "}
                     </label>
                   </div>
                   <div className="col-lg-12">
@@ -1016,7 +1016,7 @@ const EditProductform = ({ id }) => {
 
       <div className="row">
         <div className="col-12 py-2">
-          <h2 style={{fontWeight:'bold'}}>Create Variant</h2>
+          <h2 style={{ fontWeight: "bold" }}>Create Variant</h2>
         </div>
         <div className="col-3">
           <NavLink to={`/addvariant/${id}`}>
@@ -1041,20 +1041,37 @@ const EditProductform = ({ id }) => {
         {variantdata.data.map((item, index) => (
           <div className="col-3">
             <NavLink to={`/editvariant/${item._id}`}>
-            <div class="card2">
-            <img
-                          src={item.product_image1}
-                          alt="zxcvbnm"
-                          width="100%"
-                          height="100%"
-                          style={{ cursor: "pointer" }}
-                        />
-              <div class="card__content">
-                <p class="card__title" style={{textTransform:'capitalize',fontSize:'21px'}}>{item.product_name}</p>
-                <p class="card__description" style={{color:'black'}}>₹{item.selling_price} <span style={{textDecoration:'line-through',fontSize:'11px'}}>₹{item.mrp_price}</span></p>
-                <p class="card__description" style={{fontSize:'13px'}}>{item.sort_description}</p>
+              <div class="card2">
+                <img
+                  src={item.product_image1}
+                  alt="zxcvbnm"
+                  width="100%"
+                  height="100%"
+                  style={{ cursor: "pointer" }}
+                />
+                <div class="card__content">
+                  <p
+                    class="card__title"
+                    style={{ textTransform: "capitalize", fontSize: "21px" }}
+                  >
+                    {item.product_name}
+                  </p>
+                  <p class="card__description" style={{ color: "black" }}>
+                    ₹{item.selling_price}{" "}
+                    <span
+                      style={{
+                        textDecoration: "line-through",
+                        fontSize: "11px",
+                      }}
+                    >
+                      ₹{item.mrp_price}
+                    </span>
+                  </p>
+                  <p class="card__description" style={{ fontSize: "13px" }}>
+                    {item.sort_description}
+                  </p>
+                </div>
               </div>
-            </div>
             </NavLink>
           </div>
         ))}

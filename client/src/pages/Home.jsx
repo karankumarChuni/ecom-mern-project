@@ -117,6 +117,7 @@ const Home = () => {
   const {data:bestseller,isLoading:bestsellerloading} = useGetBestSellerQuery();
   const {data:featureitem,isLoading:featureitemloading} = useGetFeatureItemQuery();
   const {data:brnaditem,isLoading:branditemloading} = useGetBrandQuery();
+  console.log("brand images data:", brnaditem)
 
 
   return (
@@ -284,27 +285,25 @@ const Home = () => {
   {/*title-end*/}
 
 
-  {/* brand start */}
   <section className="brand-second section-big-mb-space">
-    <div className="container-fluid">
-      <div className="row brand-block">
-        <div className="col-12">
-          <div className="brand-slide12 no-arrow mb--5">
-          <OwlCarousel className="owl-theme" style={{width:'100%',height:'100%'}} {...optionsforbrand}>
-{brnaditem.data.map((item,index)=>(
-            <div>
-              <div className="brand-box" onClick={()=>{nvg(`/categoryforbrand/${item.brand_name}`)}}>
-              <img src={item.brand_image} alt="" className="img-fluid" />
+  <div className="container-fluid">
+    <div className="row brand-block">
+      <div className="col-12">
+        <div className="brand-slide12 no-arrow mb--5">
+          <OwlCarousel className="owl-theme" style={{ width: '100%', height: '100%' }} {...optionsforbrand}>
+            {brnaditem.data.map((item, index) => (
+              <div key={index}>
+                <div className="brand-box" onClick={() => { nvg(`/categoryforbrand/${item.brand_name}`) }}>
+                  <img src={item.brand_image.url} alt={item.brand_name} className="img-fluid" />
+                </div>
               </div>
-            </div>
-))}
-            </OwlCarousel>
-          </div>
+            ))}
+          </OwlCarousel>
         </div>
       </div>
     </div>
-  </section>
-  {/* brand start */}
+  </div>
+</section>
 
 
   {/* footer start */}

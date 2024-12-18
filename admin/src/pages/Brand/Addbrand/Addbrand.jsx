@@ -19,7 +19,7 @@ const Addbrand = () => {
               <div className="addnew d-block mb-2">
                 <button className="btn text-white closebtn">
                   <NavLink
-                    to="/bannerlist/0"
+                    to="/brandlist/0"
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     {" "}

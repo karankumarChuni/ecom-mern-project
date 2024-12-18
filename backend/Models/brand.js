@@ -14,8 +14,8 @@ var brandSchema = new mongoose.Schema({
         default:"Active",
       },
     brand_image:{
-        type:String,
-        default:null
+        public_id: String,
+        url: String
     },
 },{timestamps:true});
 

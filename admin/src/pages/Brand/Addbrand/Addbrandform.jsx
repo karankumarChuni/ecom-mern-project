@@ -1,40 +1,44 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from "jodit-react";
 import { Field, Form, Formik } from "formik";
 import img3 from "../../../assets/selectbanner.webp";
 import { Brandvalidation } from "../Validation/Brandvalidation";
-import { usePostBannerMutation } from "../../../store/api/bannerapi";
-import { useGetAllBrandNameQuery, usePostBrandMutation } from "../../../store/api/brandapi";
+import { usePostBrandMutation } from "../../../store/api/brandapi";
+
 const Addbrandform = () => {
   const imageInputRef = useRef(null);
   const nvg = useNavigate();
-
 
   const config = {
     height: "300px",
   };
 
-  // create category api start here
-  const {data:brandname,isLoading:brandnameloading} = useGetAllBrandNameQuery()
-  console.log("brandname",brandname)
   const [postbrand] = usePostBrandMutation();
 
   const BrandForm = async (value) => {
     try {
       const response = await postbrand(value);
+      console.log("response", response);
+      
+      // Check for correct status value
       if (!response.error) {
-        if (response.data.status === "successfull") {
-          nvg("/brandlist/1");
-          window.location.reload();
+        if (response.data.status === "success") {
+          alert("Brand uploaded successfully!");
+          nvg("/brandlist/0");
+        } else {
+          alert("Failed to upload brand. Please try again.");
         }
       } else {
-        
+        alert("Failed to upload brand. Please try again.");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error submitting brand:", error);
+      alert("An error occurred while submitting the brand.");
+    }
   };
-  // create category api end here
+
   return (
     <div className="container-fuild pb-4 pt-3 px-2 bg-white">
       <Formik
@@ -56,16 +60,8 @@ const Addbrandform = () => {
       >
         {({ values, errors, handleSubmit, touched, setFieldValue }) => (
           <Form autoComplete="off" onSubmit={handleSubmit}>
-            <div
-              className="row bg-white pb-4 round"
-              style={{
-                border: "1px solid #E0E0E0",
-                margin: "10px 0px",
-                borderRadius: "3px",
-                position: "relative",
-              }}
-            >
-          
+            <div className="row bg-white pb-4 round" style={{ border: "1px solid #E0E0E0", margin: "10px 0px", borderRadius: "3px", position: "relative" }}>
+              {/* Brand Name Input */}
               <div className="col-md-6 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-4">
@@ -74,15 +70,7 @@ const Addbrandform = () => {
                     </label>
                   </div>
                   <div className="col-lg-8">
-                    <Field as="select" name="brand_name" className="form-select">
-                      <option value="" disabled>
-                        Select Brand
-                      </option>
-                      {brandnameloading === true ? "" : brandname.data.map((item)=>(
-                      <option value={item}>{item}</option>
-                      ))}
-                      {/* <option value="Slider">Slider</option> */}
-                    </Field>
+                    <Field type="text" name="brand_name" className="form-control" placeholder="Enter Brand Name" />
                   </div>
                   <div className="offset-lg-4 col-lg-8">
                     {errors.brand_name && touched.brand_name ? (
@@ -92,6 +80,7 @@ const Addbrandform = () => {
                 </div>
               </div>
 
+              {/* Status Dropdown */}
               <div className="col-md-6 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-4">
@@ -115,9 +104,8 @@ const Addbrandform = () => {
                   </div>
                 </div>
               </div>
-            
 
-
+              {/* Image Upload */}
               <div className="col-12 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
@@ -129,10 +117,7 @@ const Addbrandform = () => {
                     <div className="border d-flex justify-content-center">
                       <button
                         type="button"
-                        style={{
-                          border: "none",
-                          outline: "none",
-                        }}
+                        style={{ border: "none", outline: "none" }}
                       >
                         <input
                           type="file"
@@ -141,19 +126,12 @@ const Addbrandform = () => {
                           ref={imageInputRef}
                           accept="image/*"
                           onChange={(event) => {
-                            setFieldValue(
-                              "banner",
-                              event.currentTarget.files[0]
-                            );
+                            setFieldValue("banner", event.currentTarget.files[0]);
                           }}
                         />
                         <img
-                          src={
-                            values.banner === null
-                              ? img3
-                              : URL.createObjectURL(values.banner)
-                          }
-                          alt="zxcvbnm"
+                          src={values.banner === null ? img3 : URL.createObjectURL(values.banner)}
+                          alt="Select Brand Banner"
                           width="100%"
                           height="200px"
                           onClick={() => {
@@ -172,6 +150,7 @@ const Addbrandform = () => {
                 </div>
               </div>
 
+              {/* Description */}
               <div className="col-12 px-2 pt-3">
                 <div className="row">
                   <div className="col-lg-12">
@@ -184,7 +163,9 @@ const Addbrandform = () => {
                     <JoditEditor
                       config={config}
                       value={values.description}
-                      onChange={(content) => setFieldValue("description", content)}
+                      onChange={(content) =>
+                        setFieldValue("description", content)
+                      }
                     />
                   </div>
                   <div className="col-lg-12">
@@ -195,6 +176,7 @@ const Addbrandform = () => {
                 </div>
               </div>
 
+              {/* Submit and Cancel Buttons */}
               <div
                 className="col-12 py-5 px-4 d-flex justify-content-end"
                 style={{ gap: "4px" }}
