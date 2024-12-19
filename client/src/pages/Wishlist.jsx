@@ -1,27 +1,32 @@
 import Header from "../components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import {  useGetWishlistProductQuery,usePostDeleteWishlistMutation} from "../store/api/wishlistapi";
+import {
+  useGetWishlistProductQuery,
+  usePostDeleteWishlistMutation,
+} from "../store/api/wishlistapi";
 import { useDispatch, useSelector } from "react-redux";
 import { addwishlist } from "../store/state/wishlist";
 
 const Wishlist = () => {
   const nvg = useNavigate();
-  const {data: wishlistdata,isLoading,refetch} = useGetWishlistProductQuery();
+  const {
+    data: wishlistdata,
+    isLoading,
+    refetch,
+  } = useGetWishlistProductQuery();
+  console.log("wishlist data", wishlistdata);
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
   const dispatch = useDispatch();
   const globalvariable = useSelector((state) => state);
 
-
-  // redirect to pdp page 
+  // redirect to pdp page
   const transfer = (productid) => {
     nvg(`/productdetails/${productid}`);
   };
-  // redirect to pdp page 
+  // redirect to pdp page
 
-
-
-  // Remove item from wishlist start here 
+  // Remove item from wishlist start here
   const removewishlist = async (data) => {
     const wishlist_value = {
       product_id: data.product_id === null ? null : data.product_id._id,
@@ -36,9 +41,7 @@ const Wishlist = () => {
       refetch();
     }
   };
-  // Remove item from wishlist end here 
-
-
+  // Remove item from wishlist end here
 
   return isLoading === true ? (
     <></>
@@ -47,7 +50,10 @@ const Wishlist = () => {
       <Header />
 
       {/* breadcrumb start */}
-      <div className="breadcrumb-main marginfromtop" style={{backgroundColor:"#f9f9f9"}}>
+      <div
+        className="breadcrumb-main marginfromtop"
+        style={{ backgroundColor: "#f9f9f9" }}
+      >
         <div className="container m-0">
           <div className="row">
             <div className="col">
@@ -117,7 +123,7 @@ const Wishlist = () => {
                                             src={
                                               item.product_id != null
                                                 ? item?.product_id
-                                                    .product_image1
+                                                    .product_image1?.url
                                                 : item?.product_variant_id
                                                     .product_image1
                                             }
