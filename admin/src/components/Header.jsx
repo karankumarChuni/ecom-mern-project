@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState, useEffect } from "react";
 import img from "../assets/qwerty.png";
 import { BsFillEnvelopeFill } from "react-icons/bs";
 import {
@@ -15,33 +15,25 @@ import {
   privateurl,
   removeToken,
 } from "../Localstorage/Store";
-import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
-// import img2 from "../assets/loginlogo.png";
 import img2 from "../assets/Ecomus.svg";
-import axios from "axios";
 import { useContactlistlatestQuery } from "../store/api/webinfoapi";
+
 const Header = () => {
   const nvg = useNavigate();
   const userinfo = gettoken();
-  console.log("this user info",userinfo)
-  const logoutevt = async () => {
-    removeToken();
-    nvg("/");
-  };
   const sshh = getsoh();
 
   const { data: userData, isLoading } = useContactlistlatestQuery();
 
+  const logoutevt = async () => {
+    removeToken();
+    nvg("/");
+  };
 
-console.log("dkdkdkdkkc",userData)
-
-
-
-
-  return (
-    userinfo ? <div
+  return userinfo ? (
+    <div
       className="header"
       style={{
         display: "flex",
@@ -51,22 +43,20 @@ console.log("dkdkdkdkkc",userData)
     >
       <div>
         {sshh !== true ? (
-          <img src={img2} alt="qwerty" style={{ height: "24px",marginLeft:"4px" }} />
+          <img
+            src={img2}
+            alt="qwerty"
+            style={{ height: "24px", marginLeft: "4px" }}
+          />
         ) : (
           ""
         )}
       </div>
       <div style={{ display: "flex" }}>
         <div className="icongroup">
-          <div style={{ width: "0px", height: "0px" }}>
-
-          </div>
-  
-
-
+          <div style={{ width: "0px", height: "0px" }}></div>
           <div className="icon white">
             <div className="btn-group">
-              {/* <button type="button" className="btn btn-danger"></button> */}
               <button
                 type="button"
                 className="btn dropdown-toggle-split"
@@ -74,49 +64,39 @@ console.log("dkdkdkdkkc",userData)
                 aria-expanded="false"
               >
                 <BsFillEnvelopeFill color="white" size="19px" />
-                {/* <span className="visually-hidden">Toggle Dropdown</span> */}
               </button>
               <ul className="dropdown-menu">
                 <div className="notification">
-                  <h6 style={{position:'relative',top:'10px'}}>Notification</h6>
-                  {/* <h6 className="ms-auto">Clear All</h6> */}
-                </div>{" "}
+                  <h6 style={{ position: "relative", top: "10px" }}>
+                    Notification
+                  </h6>
+                </div>
                 <hr />
-                {isLoading == false ? userData.data.map((item,index)=>(
-                  <>
-  <div className="col drop-msg d-flex align-items-start ms-3 col-12">
-  <div className="col-3">
-    <img src={img} alt="" />
-  </div>
-  <div className="col-9">
-    <h6 className="noti-h">{item.firstname} {item.lastname}</h6>
-    <h6 className="noti">
-      {item.Message.length > 40 ? `${item.Message.substring(0, 40)}...` : `${item.Message.substring(0, 25)}`}
-    </h6>
-  </div>
-</div>
-<hr /></> )) : ''}
-              
-                {/* // <div className="col drop-msg d-flex align-items-start ms-3 col-12">
-                //   <div className="col-3">
-                //     <img src={img} alt="" />
-                //   </div>
-                //   <div className="col-9">
-                //     <h6 className="noti-h">Rohit Kumar</h6>
-                //     <h6 className="noti">
-                //       Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                //     </h6>
-                //   </div>
-                // </div> */}
-                {/* <div className="">
-                  {" "}
-                  <hr />
-                  <h6 className="text-center">View All</h6>
-                </div> */}
+                {isLoading == false
+                  ? userData.data.map((item, index) => (
+                      <React.Fragment key={item.id || index}>
+                        <div className="col drop-msg d-flex align-items-start ms-3 col-12">
+                          <div className="col-3">
+                            <img src={img} alt="" />
+                          </div>
+                          <div className="col-9">
+                            <h6 className="noti-h">
+                              {item.firstname} {item.lastname}
+                            </h6>
+                            <h6 className="noti">
+                              {item.Message.length > 40
+                                ? `${item.Message.substring(0, 40)}...`
+                                : `${item.Message.substring(0, 25)}`}
+                            </h6>
+                          </div>
+                        </div>
+                        <hr />
+                      </React.Fragment>
+                    ))
+                  : ""}
               </ul>
             </div>
           </div>
-
           <div className="icon white">
             <FaBell size="19px" />
           </div>
@@ -144,55 +124,41 @@ console.log("dkdkdkdkkc",userData)
                 <img src={img} alt="" />
               </div>
               <div className="col-12 name-drop">
-                <p className="head-txt">{userinfo?.user?.first_name} {userinfo?.user?.last_name}</p>
+                <p className="head-txt">
+                  {userinfo?.user?.first_name} {userinfo?.user?.last_name}
+                </p>
                 <p className="head-para">{userinfo?.user?.email}</p>
               </div>
             </div>
             <ul className="p-0">
               <li>
                 <NavLink to="/profiledetail">
-                  <FaUserAlt /> <span>View Profile</span>{" "}
+                  <FaUserAlt /> <span>View Profile</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/accountpassword">
-                  <FaCog /> <span>Account Setting</span>{" "}
+                  <FaCog /> <span>Account Setting</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/logactivity">
-                  <FaSignature /> <span>Login Activity</span>{" "}
-                </NavLink>{" "}
+                  <FaSignature /> <span>Login Activity</span>
+                </NavLink>
                 <hr />
               </li>
               <li onClick={logoutevt}>
                 <NavLink to="#">
-                  {" "}
-                  <FaEuroSign /> <span>Log Out</span>{" "}
+                  <FaEuroSign /> <span>Log Out</span>
                 </NavLink>
               </li>
             </ul>
           </div>
         </div>
       </div>
-  
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-  
-    </div> : ''
+    </div>
+  ) : (
+    ""
   );
 };
 

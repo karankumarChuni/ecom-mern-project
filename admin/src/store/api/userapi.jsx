@@ -1,62 +1,76 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-const token = localStorage.getItem('token'); // Fetch dynamically
-      console.log("Using token:", token); // Debug token value
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+// Debugging token retrieval
+const token = localStorage.getItem("token");
+console.log("Initial token:", token);
 
 export const userApi = createApi({
-  reducerPath: 'userApi',
+  reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8000/api/",
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token'); // Fetch dynamically
+      const token = localStorage.getItem("token"); // Fetch dynamically
       console.log("Using token:", token); // Debug token value
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       } else {
         console.warn("No token found in localStorage.");
       }
       return headers;
     },
   }),
+  tagTypes: ["User", "Category"], // Define cache tags for endpoints
   endpoints: (builder) => ({
+    // Get all users
     getAllUsers: builder.query({
       query: () => ({
-        url: 'user',
-        method: 'GET',
+        url: "user",
+        method: "GET",
       }),
+      providesTags: ["User"], // Enables cache invalidation
     }),
+    // Get a single user by ID
     getSingleUser: builder.query({
       query: (id) => ({
         url: `user/${id}`,
-        method: 'GET',
+        method: "GET",
       }),
+      providesTags: (result, error, id) => [{ type: "User", id }],
     }),
+    // Post a new category
     postCategory: builder.mutation({
       query: (data) => ({
-        url: 'category',
-        method: 'POST',
+        url: "category",
+        method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Category"], // Invalidates category cache
     }),
+    // Update a user by ID
     patchUser: builder.mutation({
       query: ({ data, id }) => ({
         url: `user/${id}`,
-        method: 'PATCH',
+        method: "PATCH",
         body: data,
       }),
+      invalidatesTags: (result, error, { id }) => [{ type: "User", id }], // Cache invalidation for specific user
     }),
+    // Delete a user by ID
     deleteUser: builder.mutation({
       query: (id) => ({
         url: `user/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
+      invalidatesTags: (result, error, id) => [{ type: "User", id }], // Cache invalidation for specific user
     }),
   }),
 });
 
-export const { 
-  useGetAllUsersQuery, 
-  useGetSingleUserQuery, 
-  usePostCategoryMutation, 
-  usePatchUserMutation, 
-  useDeleteUserMutation 
+// Export hooks for usage in components
+export const {
+  useGetAllUsersQuery,
+  useGetSingleUserQuery,
+  usePostCategoryMutation,
+  usePatchUserMutation,
+  useDeleteUserMutation,
 } = userApi;
