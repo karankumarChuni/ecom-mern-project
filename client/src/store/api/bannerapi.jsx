@@ -1,33 +1,38 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const bannerApi = createApi({
-  reducerPath: 'bannerApi',
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/" }),
+  reducerPath: "bannerApi",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     getBanner: builder.query({
       query: () => ({
         url: `banner`,
-        method:'GET'
-      })
+        method: "GET",
+      }),
     }),
     getNewArrival: builder.query({
       query: () => ({
         url: `list/newarrival`,
-        method:'GET'
-      })
+        method: "GET",
+      }),
     }),
     getBestSeller: builder.query({
       query: () => ({
         url: `list/bestseller`,
-        method:'GET'
-      })
+        method: "GET",
+      }),
     }),
     getFeatureItem: builder.query({
       query: () => ({
         url: `list/featureitem`,
-        method:'GET'
-      })
+        method: "GET",
+      }),
     }),
   }),
-})
+});
 
-export const { useGetBannerQuery,useGetNewArrivalQuery,useGetBestSellerQuery,useGetFeatureItemQuery } = bannerApi
+export const {
+  useGetBannerQuery,
+  useGetNewArrivalQuery,
+  useGetBestSellerQuery,
+  useGetFeatureItemQuery,
+} = bannerApi;

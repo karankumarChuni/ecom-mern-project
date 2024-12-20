@@ -7,7 +7,7 @@ console.log("Initial token:", token);
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/",
+    baseUrl: process.env.REACT_APP_API_URL,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token"); // Fetch dynamically
       console.log("Using token:", token); // Debug token value

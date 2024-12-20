@@ -33,7 +33,6 @@ import Editorder from "./pages/Order/Editorder/Editorder";
 import Contactlist from "./pages/Website_info/Listcontact/Contactlist";
 import Viewcontact from "./pages/Website_info/Editbanner/Viewcontact";
 function App() {
- 
   return (
     <div className="app">
       

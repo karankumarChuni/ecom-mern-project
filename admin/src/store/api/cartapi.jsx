@@ -1,21 +1,21 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const cartApi = createApi({
-  reducerPath: 'cartApi',
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/" }),
+  reducerPath: "cartApi",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     getAllCartItem: builder.query({
       query: () => ({
-        url:'cart',
-        method:'GET'
-      })
+        url: "cart",
+        method: "GET",
+      }),
     }),
     deleteCart: builder.mutation({
-        query: (id) => ({
-          url: `cart/${id}`,
-          method:'DELETE'
-        })
+      query: (id) => ({
+        url: `cart/${id}`,
+        method: "DELETE",
       }),
+    }),
   }),
-})
+});
 
-export const { useGetAllCartItemQuery,useDeleteCartMutation } = cartApi
+export const { useGetAllCartItemQuery, useDeleteCartMutation } = cartApi;

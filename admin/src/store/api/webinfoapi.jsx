@@ -1,52 +1,60 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const webinfoApi = createApi({
-  reducerPath: 'webinfoApi',
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/" }),
+  reducerPath: "webinfoApi",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     getWebinfo: builder.query({
       query: () => ({
-        url:'websiteinfo',
-        method:'GET'
-      })
+        url: "websiteinfo",
+        method: "GET",
+      }),
     }),
     countinfo: builder.query({
       query: () => ({
-        url:'countinfo',
-        method:'GET'
-      })
+        url: "countinfo",
+        method: "GET",
+      }),
     }),
     contactlist: builder.query({
       query: () => ({
-        url:'contactus',
-        method:'GET'
-      })
+        url: "contactus",
+        method: "GET",
+      }),
     }),
     contactlistlatest: builder.query({
       query: () => ({
-        url:'contactus',
-        method:'GET'
-      })
+        url: "contactus",
+        method: "GET",
+      }),
     }),
     contactsingle: builder.query({
       query: (id) => ({
-        url:`contactus/${id}`,
-        method:'GET'
-      })
+        url: `contactus/${id}`,
+        method: "GET",
+      }),
     }),
     patchWebinfo: builder.mutation({
-      query: ({data}) => ({
+      query: ({ data }) => ({
         url: `websiteinfo`,
-        method:'PATCH',
-        body:data
-      })
+        method: "PATCH",
+        body: data,
+      }),
     }),
     deleteContact: builder.mutation({
       query: (id) => ({
         url: `${id}`,
-        method:'DELETE'
-      })
+        method: "DELETE",
+      }),
     }),
   }),
-})
+});
 
-export const { useGetWebinfoQuery,usePatchWebinfoMutation,useCountinfoQuery,useContactlistQuery,useDeleteContactMutation,useContactsingleQuery,useContactlistlatestQuery } = webinfoApi
+export const {
+  useGetWebinfoQuery,
+  usePatchWebinfoMutation,
+  useCountinfoQuery,
+  useContactlistQuery,
+  useDeleteContactMutation,
+  useContactsingleQuery,
+  useContactlistlatestQuery,
+} = webinfoApi;
