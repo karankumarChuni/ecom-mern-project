@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const Nav = ({ togglesidebar, closesidebar }) => {
   const nvg = useNavigate();
-  const globalvariable = useSelector(state => state);
+  const globalvariable = useSelector((state) => state);
   const redirectfun = (linkpage) => {
     nvg(linkpage);
   };
@@ -49,7 +49,7 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                         <i className="fa fa-angle-left" /> back
                       </li>
 
-                      {categoryData.data.map((item, index) => (
+                      {categoryData?.data.map((item, index) => (
                         <MobileSubcategory
                           value={item}
                           key={index}
@@ -89,9 +89,9 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                             />
                           </div>
                         </li>
-                        {categoryData.data.map((item, index) => (
+                        {categoryData?.data.map((item, index) => (
                           <Subcategory
-                          key={index}
+                            key={index}
                             value={item}
                             issubcategory={
                               item.subcategories?.[0]?.name ? 1 : 0
@@ -211,7 +211,10 @@ const Nav = ({ togglesidebar, closesidebar }) => {
                       <label style={{ fontSize: "10px", margin: "0px" }}>
                         Wishlist
                       </label>
-                      <div className="item-count-contain inverce"> {globalvariable.wishlist} </div>
+                      <div className="item-count-contain inverce">
+                        {" "}
+                        {globalvariable.wishlist}{" "}
+                      </div>
                     </li>
                     <li
                       className="mobile-cart

@@ -143,7 +143,7 @@ const Home = () => {
           style={{ width: "100%", height: "100%" }}
           {...options}
         >
-          {Banner.data.map((item, index) =>
+          {Banner?.data.map((item, index) =>
             item.banner_type === "Banner" ? (
               <div
                 key={index}
@@ -248,7 +248,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {newarrivals.data.map((item) => (
+                  {newarrivals?.data.map((item) => (
                     <Crouselitem item={item} />
                   ))}
                 </OwlCarousel>
@@ -272,7 +272,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {bestseller.data.map((item) => (
+                  {bestseller?.data.map((item) => (
                     <Crouselitem item={item} />
                   ))}
                 </OwlCarousel>
@@ -297,7 +297,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...options2}
                 >
-                  {featureitem.data.map((item) => (
+                  {featureitem?.data.map((item) => (
                     <Crouselitem item={item} />
                   ))}
                 </OwlCarousel>
@@ -317,7 +317,7 @@ const Home = () => {
           style={{ width: "100%", height: "100%" }}
           {...options}
         >
-          {Banner.data.map((item, index) =>
+          {Banner?.data.map((item, index) =>
             item.banner_type === "Slider" ? (
               <div key={index} style={{ height: isMobile ? "300px" : "400px" }}>
                 <img
@@ -357,7 +357,7 @@ const Home = () => {
                   style={{ width: "100%", height: "100%" }}
                   {...optionsforbrand}
                 >
-                  {brnaditem.data.map((item, index) => (
+                  {brnaditem?.data.map((item, index) => (
                     <div key={index}>
                       <div
                         className="brand-box"

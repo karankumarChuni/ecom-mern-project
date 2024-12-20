@@ -23,7 +23,7 @@ const cloudinary = require('cloudinary');
 var morgan = require('morgan')
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://ecom-mern-project.onrender.com","https://ecom-mern-project-admin.onrender.com"], // List allowed origins
+  origin: ["http://localhost:3000","http://localhost:3001", "https://ecom-mern-project.onrender.com","https://ecom-mern-project-admin.onrender.com"], // List allowed origins
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
