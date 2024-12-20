@@ -202,14 +202,15 @@ function Productdetails() {
       }
     };
     setloading(true);
-    if (isLoading === false) {
-      const newdata1 = [data.data, ...data.productvariant];
+    if (!isLoading && data) {
+      const newdata1 = [data?.data, ...(data?.productvariant || [])];
 
       const newdata = newdata1.map((item) => ({
         ...item,
-        weightandtype: `${item.weight} ${item.weight_type}`, // Replace 'defaultValue' with your desired value
+        weightandtype: `${item?.weight || ""} ${item?.weight_type || ""}`,
       }));
-      console.log("this is latest data", newdata);
+
+      console.log("Processed Data:", newdata);
       setData(newdata);
       setloading(false);
     }

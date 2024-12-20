@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const secretKey = process.env.JWT_SECRET;
 
 const login = async (req, res) => {
+  console.log("hello login routes")
   try {
     const { email, password, isAdminLogin } = req.body;
     const user = await usertable.findOne({ email });

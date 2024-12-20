@@ -13,73 +13,87 @@ import { useGetProductBySearchQuery } from "../../store/api/productapi";
 const Header = () => {
   const [showsidebar, setshowsidebar] = useState(false);
   const location = useLocation();
-  const searchRef = useRef(null)
-  const [serchvalue, setserchvalue] = useState('');
+  const searchRef = useRef(null);
+  const [serchvalue, setserchvalue] = useState("");
   const [searchdata, setsearchdata] = useState([]);
   const [showrecords, setshowrecords] = useState(false);
   const checktoken = gettoken();
-  const pagename = location.pathname
+  const pagename = location.pathname;
   const nvg = useNavigate();
   const dispatch = useDispatch();
-  const gobalvariable = useSelector(state => state);
+  const gobalvariable = useSelector((state) => state);
   const redirectfun = (linkpage) => {
     nvg(linkpage);
   };
   const closesidebar = () => {
     setshowsidebar(false);
   };
-  const {data:cartcount,isLoading,refetch} = useGetCartCountQuery()
-  const {data:wishlistcount,isLoading:wislistloading,refetch:wishlistrefetch} = useGetWishlistCountQuery()
+  const { data: cartcount, isLoading, refetch } = useGetCartCountQuery();
+  const {
+    data: wishlistcount,
+    isLoading: wislistloading,
+    refetch: wishlistrefetch,
+  } = useGetWishlistCountQuery();
 
-
-  const transfer = (productid,pname)=>{
+  const transfer = (productid, pname) => {
     // nvg(`/productdetails/${productid}`, {
     //   // state: {
     //   //   id: productid,
     //   //   pname: pname,
     //   // },
     // });
-    nvg(`/productdetails/${productid}`)
+    nvg(`/productdetails/${productid}`);
     window.location.reload();
-    if(pagename === "/productdetails"){
+    if (pagename === "/productdetails") {
       window.location.reload();
     }
-  }
-  
-  const {data:searchapidata,isLoading:searchloading,refetch:refetchsearch,isError} = useGetProductBySearchQuery(serchvalue)
-console.log("eeddeeeeeee",isError)
+  };
+
+  const {
+    data: searchapidata,
+    isLoading: searchloading,
+    refetch: refetchsearch,
+    isError,
+  } = useGetProductBySearchQuery(serchvalue);
+  console.log("eeddeeeeeee", isError);
   const searchresult = async (value) => {
-console.log("kdkdd",searchapidata)
-    if(value === undefined || value === null || value === ''){     
-      refetchsearch()
-    }else{
-      refetchsearch()
+    console.log("kdkdd", searchapidata);
+    if (value === undefined || value === null || value === "") {
+      refetchsearch();
+    } else {
+      refetchsearch();
 
-    // setsearchdata(response.data.data)
+      // setsearchdata(response.data.data)
+    }
+  };
 
-  }
-   }
+  useEffect(() => {
+    // Log the data to debug the response
+    console.log("Cart Count:", cartcount, "Wishlist Count:", wishlistcount);
 
-   
-  useEffect(()=>{
-    if(isLoading === false && wislistloading === false){
+    // Ensure data is valid before accessing properties
+    if (
+      cartcount?.totalItems !== undefined &&
+      wishlistcount?.totalItems !== undefined
+    ) {
       dispatch(addItem(cartcount.totalItems));
       dispatch(addwishlist(wishlistcount.totalItems));
+    } else {
+      console.warn("Cart or Wishlist data is undefined");
     }
-  },[isLoading,cartcount,wislistloading,wishlistcount])
-  
+  }, [isLoading, cartcount, wislistloading, wishlistcount]);
+
   const logoutfunction = () => {
     removeToken();
     nvg("/");
   };
 
-  useEffect(()=>{
-refetch()
-  },[gobalvariable.cart])
-
+  useEffect(() => {
+    refetch();
+  }, [gobalvariable.cart]);
 
   return (
-  <header className="fixed-top" style={{ position: "fixed" }}>
+    <header className="fixed-top" style={{ position: "fixed" }}>
       {/* top header start here  */}
       <div className="header7">
         <div className="custom-container">
@@ -104,93 +118,182 @@ refetch()
                     </NavLink>
                   </div>
                 </div>
-                <div style={{position:'relative'}}>
-                <div
-                ref={searchRef}
-                  className="header-search ajax-search the-basics dflex"
-                  style={{
-                    backgroundColor: "white",
-                    border: "1px solid #cbc7c7",
-                    padding: "0px 3px",
-                  }}
-                >
+                <div style={{ position: "relative" }}>
                   <div
-                    className="input-group"
-                    style={{ border: "1px solid white" }}
-                  >
-                    <input
-                      type="text"
-                      className="form-control newsizeinput"
-                      style={{
-                        border: "1px solid white",
-                        background: "white",
-                        borderRadius:"25px",
-                        overflowX:'hidden',
-                        padding: 0,
-                        fontSize:'15px',
-                        borderRadius: 0,
-                        letterSpacing: 0,
-                      }}
-                      value={serchvalue}
-                      onChange={(e)=>{searchresult(e.target.value);setserchvalue(e.target.value);setshowrecords(true)}}
-                      // onBlur={()=>{setshowrecords(false);searchresult([]);setserchvalue('')}}
-                      placeholder="Search for Product"
-                    />
-                  </div>
-                  <div
-                    className="input-group-text btn "
+                    ref={searchRef}
+                    className="header-search ajax-search the-basics dflex"
                     style={{
                       backgroundColor: "white",
-                      padding: "0px 17px",
-                      borderRadius: 0,
-                      display: "flex",
-                      border: "none",
+                      border: "1px solid #cbc7c7",
+                      padding: "0px 3px",
                     }}
                   >
-                    <span className="newfontsize" onClick={()=>{setshowrecords(serchvalue !== '' ? !showrecords : false)}}>
-                      {" "}
-                      <i
-                        className="fa fa-search "
-                        style={{ color: "#059fe2" }}
+                    <div
+                      className="input-group"
+                      style={{ border: "1px solid white" }}
+                    >
+                      <input
+                        type="text"
+                        className="form-control newsizeinput"
+                        style={{
+                          border: "1px solid white",
+                          background: "white",
+                          borderRadius: "25px",
+                          overflowX: "hidden",
+                          padding: 0,
+                          fontSize: "15px",
+                          borderRadius: 0,
+                          letterSpacing: 0,
+                        }}
+                        value={serchvalue}
+                        onChange={(e) => {
+                          searchresult(e.target.value);
+                          setserchvalue(e.target.value);
+                          setshowrecords(true);
+                        }}
+                        // onBlur={()=>{setshowrecords(false);searchresult([]);setserchvalue('')}}
+                        placeholder="Search for Product"
                       />
-                    </span>
+                    </div>
+                    <div
+                      className="input-group-text btn "
+                      style={{
+                        backgroundColor: "white",
+                        padding: "0px 17px",
+                        borderRadius: 0,
+                        display: "flex",
+                        border: "none",
+                      }}
+                    >
+                      <span
+                        className="newfontsize"
+                        onClick={() => {
+                          setshowrecords(
+                            serchvalue !== "" ? !showrecords : false
+                          );
+                        }}
+                      >
+                        {" "}
+                        <i
+                          className="fa fa-search "
+                          style={{ color: "#059fe2" }}
+                        />
+                      </span>
+                    </div>
                   </div>
-                </div>
-                  <ul className="serachlisting" style={{display:'flex',position:'absolute',width:'100%',flexDirection:'column',zIndex:4,background:"#fff"}} >
-                  {isError  === false ? searchapidata?.results?.[0]?.product_name ? searchapidata?.results.map((item, index) => ( 
-                    <li>  
-                      <div className="p-1 d-flex" style={{gap:"10px",cursor:'pointer'}} onClick={()=>{transfer(item._id,item.title)}} >
-                        <div className="imagecontain" style={{width:'47%'}}>
-                        <img src={item.product_image1} style={{width:'100%',height:'100%'}} className="img-fluid  " alt="product" />
-                        </div>
-                        <div className="cartinfo">
-                         <h6 style={{fontSize:'12px',color:'#059fe2',fontWeight:'600',padding:'3px 0px'}}>{item.product_name}</h6>
-                         <h6 style={{fontSize:'12px',color:'#059fe2',padding:'3px 0px'}}>₹{item.selling_price}</h6>
-                         <p style={{fontSize:'11px',color:'#059fe2',display: "-webkit-box",
-                                  WebkitLineClamp: "2",
-                                  WebkitBoxOrient: "vertical",
-                                  overflow: "hidden",}}>{item.sort_description}</p>
-                        </div>
-                      </div>
-                    </li>
-                        )) : serchvalue === '' ? '' : <li style={{width:'100%'}}>  
-                        <div className="p-1 d-flex" style={{gap:"10px",padding:'4px 0px',cursor:'pointer',width:'100%',display:'flex',justifyContent:'center'}} >
-          
-                           <h6 style={{fontSize:'14px',color:'#333',fontWeight:'600',padding:'3px 0px'}}>No Record Fount</h6>
-                        
-                        
-                        </div>
-                      </li> : ''}
+                  <ul
+                    className="serachlisting"
+                    style={{
+                      display: "flex",
+                      position: "absolute",
+                      width: "100%",
+                      flexDirection: "column",
+                      zIndex: 4,
+                      background: "#fff",
+                    }}
+                  >
+                    {isError === false ? (
+                      searchapidata?.results?.[0]?.product_name ? (
+                        searchapidata?.results.map((item, index) => (
+                          <li>
+                            <div
+                              className="p-1 d-flex"
+                              style={{ gap: "10px", cursor: "pointer" }}
+                              onClick={() => {
+                                transfer(item._id, item.title);
+                              }}
+                            >
+                              <div
+                                className="imagecontain"
+                                style={{ width: "47%" }}
+                              >
+                                <img
+                                  src={item.product_image1}
+                                  style={{ width: "100%", height: "100%" }}
+                                  className="img-fluid  "
+                                  alt="product"
+                                />
+                              </div>
+                              <div className="cartinfo">
+                                <h6
+                                  style={{
+                                    fontSize: "12px",
+                                    color: "#059fe2",
+                                    fontWeight: "600",
+                                    padding: "3px 0px",
+                                  }}
+                                >
+                                  {item.product_name}
+                                </h6>
+                                <h6
+                                  style={{
+                                    fontSize: "12px",
+                                    color: "#059fe2",
+                                    padding: "3px 0px",
+                                  }}
+                                >
+                                  ₹{item.selling_price}
+                                </h6>
+                                <p
+                                  style={{
+                                    fontSize: "11px",
+                                    color: "#059fe2",
+                                    display: "-webkit-box",
+                                    WebkitLineClamp: "2",
+                                    WebkitBoxOrient: "vertical",
+                                    overflow: "hidden",
+                                  }}
+                                >
+                                  {item.sort_description}
+                                </p>
+                              </div>
+                            </div>
+                          </li>
+                        ))
+                      ) : serchvalue === "" ? (
+                        ""
+                      ) : (
+                        <li style={{ width: "100%" }}>
+                          <div
+                            className="p-1 d-flex"
+                            style={{
+                              gap: "10px",
+                              padding: "4px 0px",
+                              cursor: "pointer",
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <h6
+                              style={{
+                                fontSize: "14px",
+                                color: "#333",
+                                fontWeight: "600",
+                                padding: "3px 0px",
+                              }}
+                            >
+                              No Record Fount
+                            </h6>
+                          </div>
+                        </li>
+                      )
+                    ) : (
+                      ""
+                    )}
                   </ul>
-                  </div>
+                </div>
                 <div className="icon-block">
                   <ul className="theme-color">
-                    <li
-                      className="mobile-user newposition2 item-count ">
+                    <li className="mobile-user newposition2 item-count ">
                       <div
                         className="dropdown show d-flex showaccountcontent"
                         style={{ justifyContent: "end", alignItems: "end" }}
-                        onClick={() =>{checktoken ? nvg("/profile", { state: { id: 1 } }) : nvg('/login')}}
+                        onClick={() => {
+                          checktoken
+                            ? nvg("/profile", { state: { id: 1 } })
+                            : nvg("/login");
+                        }}
                       >
                         <NavLink to="#" className="showaccountcontent">
                           <img
@@ -198,13 +301,13 @@ refetch()
                             className="newwidthpro"
                             alt={404}
                           />
-                        <span
-                          className="mobilehide largesize"
-                          style={{ color: "black", width: "13px" }}
+                          <span
+                            className="mobilehide largesize"
+                            style={{ color: "black", width: "13px" }}
                           >
-                       {checktoken ? "Account" : "Login"}  
-                        </span>
-                          </NavLink>
+                            {checktoken ? "Account" : "Login"}
+                          </span>
+                        </NavLink>
                       </div>
                     </li>
                     <li className="mobile-wishlist item-count">
@@ -233,7 +336,9 @@ refetch()
                           className="newwidthpro"
                           alt={404}
                         />
-                        <div className="item-count-contain inverce">{gobalvariable.wishlist}</div>
+                        <div className="item-count-contain inverce">
+                          {gobalvariable.wishlist}
+                        </div>
                       </NavLink>
                     </li>
                     <span
@@ -325,11 +430,15 @@ refetch()
       </div>
       {/* top header end here  */}
 
-
       {/* menu start here  */}
-      {pagename === "/cart" || pagename === "/checkout" || pagename === "/pay" ? "" : <Nav togglesidebar={showsidebar} closesidebar={closesidebar} />}
+      {pagename === "/cart" ||
+      pagename === "/checkout" ||
+      pagename === "/pay" ? (
+        ""
+      ) : (
+        <Nav togglesidebar={showsidebar} closesidebar={closesidebar} />
+      )}
       {/* menu start here  */}
-
 
       {/* Search bar for mobile start here  */}
       <div
@@ -361,7 +470,6 @@ refetch()
               ></button>
             </div>
             <div className="modal-body">
-            
               <input
                 type="text"
                 name=""
