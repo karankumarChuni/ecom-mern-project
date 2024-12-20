@@ -1,5 +1,6 @@
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -15,18 +16,40 @@ const Profiledetail = () => {
   //   } = useGetUserInfoQuery();
   //   //   console.log("admin profile data:", userinfo);
   const [Data, setData] = useState({});
+  const navigate = useNavigate(); // For navigation on unauthorized access
 
   useEffect(() => {
     async function fetchData() {
       setsrtloader(true);
-      let url = `${process.env.REACT_APP_API_URL}websiteinfo`;
-      const response = await axios.get(url);
-      console.log("admin profile data:", response);
-      setData(response.data);
-      setsrtloader(false);
+      const token = localStorage.getItem("token"); // Replace with your token key
+      console.log("abc token:", token.token);
+      if (!token) {
+        console.error("No token found, redirecting to login.");
+        return;
+      }
+
+      let url = `${process.env.REACT_APP_API_URL}user/userinfo`;
+
+      try {
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Attach token
+          },
+        });
+        console.log("Admin profile data:", response.data);
+        setData(response.data);
+      } catch (error) {
+        if (error.response?.status === 401) {
+          console.error("Unauthorized access - redirecting to login.");
+        } else {
+          console.error("An error occurred:", error);
+        }
+      } finally {
+        setsrtloader(false);
+      }
     }
     fetchData();
-  }, []);
+  }, [navigate]);
 
   return (
     <div style={{ width: "100%" }}>
