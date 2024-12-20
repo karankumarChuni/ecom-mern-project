@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "proxy":"http://localhost:8000",
+  "proxy": "http://localhost:8000",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -28,7 +28,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-image-magnify": "^2.7.4",
     "react-phone-number-input": "^3.2.23",
     "react-pro-sidebar": "^1.0.0",
     "react-redux": "^8.1.3",

@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import OwlCarousel from "react-owl-carousel";
-import ReactImageMagnify from 'react-image-magnify';
+
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import Footer from '../components/Footer';
-import Header from '../components/Header/Header';
-import { AiOutlineEye, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import Footer from "../components/Footer";
+import Header from "../components/Header/Header";
+import {
+  AiOutlineEye,
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 
 const options5 = {
   items: 5,
@@ -40,9 +44,8 @@ const options5 = {
   },
 };
 function Productdetailstwo() {
-
-  const [viewimg, setviewimg] = useState("./images/product-sidebar/001.jpg")
-  const [cartnum, setcartnum] = useState(1)
+  const [viewimg, setviewimg] = useState("./images/product-sidebar/001.jpg");
+  const [cartnum, setcartnum] = useState(1);
   return (
     <>
       <Header />
@@ -55,11 +58,21 @@ function Productdetailstwo() {
                 <div>
                   {/* <h2>product</h2> */}
                   <ul>
-                    <li><a href="home.html">home</a></li>
-                    <li><i className="fa fa-angle-double-right" /></li>
-                    <li><a href="category-page(left-sidebar).html">fashion</a></li>
-                    <li><i className="fa fa-angle-double-right" /></li>
-                    <li><a href="javascript:void(0)">product</a></li>
+                    <li>
+                      <a href="home.html">home</a>
+                    </li>
+                    <li>
+                      <i className="fa fa-angle-double-right" />
+                    </li>
+                    <li>
+                      <a href="category-page(left-sidebar).html">fashion</a>
+                    </li>
+                    <li>
+                      <i className="fa fa-angle-double-right" />
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)">product</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -73,90 +86,146 @@ function Productdetailstwo() {
         <div className="collection-wrapper">
           <div className="custom-container">
             <div className="row">
-
               <div className="col-lg-12 col-sm-12 col-xs-12">
                 <div className="container-fluid">
                   {/* <div className="row">
                       <div className="col-xl-12">
                       </div>
                     </div> */}
-                  <div className="row" style={{ display: 'flex', alignItems: 'flex-start' }}>
-                    <div className="col-lg-6 makestk" >
+                  <div
+                    className="row"
+                    style={{ display: "flex", alignItems: "flex-start" }}
+                  >
+                    <div className="col-lg-6 makestk">
                       <div className="row">
                         <div className="col-md-3 col-3">
+                          <div class="container-fluid px-lg-4 px-md-3 px-2">
+                            <div className="shirt">
+                              <img
+                                src="./images/product-sidebar/001.jpg"
+                                onClick={() => {
+                                  setviewimg(
+                                    "./images/product-sidebar/001.jpg"
+                                  );
+                                }}
+                                alt
+                                className="img-fluid  image_zoom_cls-0"
+                              />
+                            </div>
 
-                          <div class='container-fluid px-lg-4 px-md-3 px-2' >
+                            <div className="shirt2">
+                              <img
+                                src="./images/product-sidebar/002.jpg"
+                                onClick={() => {
+                                  setviewimg(
+                                    "./images/product-sidebar/002.jpg"
+                                  );
+                                }}
+                                alt
+                                className="img-fluid  image_zoom_cls-1"
+                              />
+                            </div>
 
+                            <div className="shirt3">
+                              <img
+                                src="./images/product-sidebar/003.jpg"
+                                onClick={() => {
+                                  setviewimg(
+                                    "./images/product-sidebar/003.jpg"
+                                  );
+                                }}
+                                alt
+                                className="img-fluid  image_zoom_cls-2"
+                              />
+                            </div>
 
-                            <div className='shirt'><img src="./images/product-sidebar/001.jpg" onClick={() => { setviewimg("./images/product-sidebar/001.jpg") }} alt className="img-fluid  image_zoom_cls-0" /></div>
-
-                            <div className='shirt2'><img src="./images/product-sidebar/002.jpg" onClick={() => { setviewimg("./images/product-sidebar/002.jpg") }} alt className="img-fluid  image_zoom_cls-1" /></div>
-
-                            <div className='shirt3'><img src="./images/product-sidebar/003.jpg" onClick={() => { setviewimg("./images/product-sidebar/003.jpg") }} alt className="img-fluid  image_zoom_cls-2" /></div>
-
-                            <div className='shirt4'><img src="./images/product-sidebar/004.jpg" onClick={() => { setviewimg("./images/product-sidebar/004.jpg") }} alt className="img-fluid  image_zoom_cls-3" /></div>
-
+                            <div className="shirt4">
+                              <img
+                                src="./images/product-sidebar/004.jpg"
+                                onClick={() => {
+                                  setviewimg(
+                                    "./images/product-sidebar/004.jpg"
+                                  );
+                                }}
+                                alt
+                                className="img-fluid  image_zoom_cls-3"
+                              />
+                            </div>
                           </div>
                         </div>
                         <div className="col-md-9 col-9">
-                          <div className="product-slick ">
+                          <div className="product-slick">
                             <div>
-                              <ReactImageMagnify
-                                {...{
-                                  smallImage: {
-                                    alt: 'Wristwatch by Versace',
-                                    isFluidWidth: true,
-                                    src: viewimg,
-                                    width: 140,
-                                    height: 162
-                                  },
-                                  largeImage: {
-                                    src: viewimg,
-                                    width: 836,
-                                    height: 1100
-                                  },
-                                  enlargedImagePosition: 'over',
-                                  lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' }
-                                }}
-
+                              <img
+                                src={viewimg}
+                                alt="Wristwatch by Versace"
+                                className="img-fluid"
+                                width="140"
+                                height="162"
                               />
                               {/* <img src="./images/product-sidebar/001.jpg" alt className="img-fluid  image_zoom_cls-0" /> */}
                             </div>
                             {/* <div><img src="./images/product-sidebar/002.jpg" alt className="img-fluid  image_zoom_cls-1" /></div>
-                          <div><img src="./images/product-sidebar/003.jpg" alt className="img-fluid  image_zoom_cls-2" /></div>
-                          <div><img src="./images/product-sidebar/004.jpg" alt className="img-fluid  image_zoom_cls-3" /></div> */}
+    <div><img src="./images/product-sidebar/003.jpg" alt className="img-fluid  image_zoom_cls-2" /></div>
+    <div><img src="./images/product-sidebar/004.jpg" alt className="img-fluid  image_zoom_cls-3" /></div> */}
                           </div>
                         </div>
                       </div>
-
-
-
-
                     </div>
 
-
-
-
                     <div className="col-lg-6 rtl-text">
-                      <div className="product-right " style={{ boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)", borderRadius: '10px', padding: "20px 17px" }}>
+                      <div
+                        className="product-right "
+                        style={{
+                          boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)",
+                          borderRadius: "10px",
+                          padding: "20px 17px",
+                        }}
+                      >
                         <div className="pro-group">
                           <h2>Women Pink Shirt</h2>
 
                           <div className="revieu-box">
                             <ul>
-                              <li style={{ padding: '0px 4px' }}><i className="fa fa-star" /></li>
-                              <li style={{ padding: '0px 6px' }}><i className="fa fa-star" /></li>
-                              <li style={{ padding: '0px 6px' }}><i className="fa fa-star" /></li>
-                              <li style={{ padding: '0px 6px' }}><i className="fa fa-star" /></li>
-                              <li style={{ padding: '0px 4px' }}><i className="fa fa-star-o" /></li>
+                              <li style={{ padding: "0px 4px" }}>
+                                <i className="fa fa-star" />
+                              </li>
+                              <li style={{ padding: "0px 6px" }}>
+                                <i className="fa fa-star" />
+                              </li>
+                              <li style={{ padding: "0px 6px" }}>
+                                <i className="fa fa-star" />
+                              </li>
+                              <li style={{ padding: "0px 6px" }}>
+                                <i className="fa fa-star" />
+                              </li>
+                              <li style={{ padding: "0px 4px" }}>
+                                <i className="fa fa-star-o" />
+                              </li>
                             </ul>
                           </div>
 
                           <div className="revieu-box">
                             <ul className="pro-price">
-                              <li style={{ color: '#230BB3', fontWeight: "700", fontSize: "23px" }}>₹70</li>
-                              <li style={{ margin: '0px' }}><span style={{ margin: '0px', fontSize: "11px" }}>(mrp ₹140)</span></li>
-                              <li style={{ color: "black", fontSize: "11px" }}>50% off</li>
+                              <li
+                                style={{
+                                  color: "#230BB3",
+                                  fontWeight: "700",
+                                  fontSize: "23px",
+                                }}
+                              >
+                                ₹70
+                              </li>
+                              <li style={{ margin: "0px" }}>
+                                <span
+                                  style={{ margin: "0px", fontSize: "11px" }}
+                                >
+                                  (mrp ₹140)
+                                </span>
+                              </li>
+                              <li style={{ color: "black", fontSize: "11px" }}>
+                                50% off
+                              </li>
                             </ul>
                             {/* <a href="review.html"><span>(6 reviews)</span></a> */}
                           </div>
@@ -178,8 +247,14 @@ function Productdetailstwo() {
                         </p>
                       </div>
                     </div> */}
-                        <div id="selectSize" className="pro-group addeffect-section product-description border-product d-flex" style={{ flexWrap: "wrap", justifyContent: "space-between" }}>
-
+                        <div
+                          id="selectSize"
+                          className="pro-group addeffect-section product-description border-product d-flex"
+                          style={{
+                            flexWrap: "wrap",
+                            justifyContent: "space-between",
+                          }}
+                        >
                           <div className="productdetailcontainer customwidth">
                             <h6 className="product-title">color</h6>
                             <div className="color-selector inline">
@@ -190,15 +265,12 @@ function Productdetailstwo() {
                                 <li>
                                   <div className="color-2" />
                                 </li>
-                                <li>
-                                  {/* <div className="color-3" /> */}
-                                </li>
+                                <li>{/* <div className="color-3" /> */}</li>
                                 <li>
                                   <div className="color-4" />
                                 </li>
                                 <li>
                                   <div className="color-6" />
-
                                 </li>
                                 <li>
                                   <div className="color-5" />
@@ -210,15 +282,32 @@ function Productdetailstwo() {
                               </ul>
                             </div>
                           </div>
-                          <div className="productdetailcontainer customwidth" >
-                            <h6 className="product-title mt-2">Available Size</h6>
+                          <div className="productdetailcontainer customwidth">
+                            <h6 className="product-title mt-2">
+                              Available Size
+                            </h6>
                             <div className="size-box">
                               <ul>
-                                <li ><a href="javascript:void(0)">s</a></li>
-                                <li><a href="javascript:void(0)">m</a></li>
-                                <li style={{ background: "#230bb3" }}><a style={{ color: "white" }} href="javascript:void(0)">l</a></li>
-                                <li><a href="javascript:void(0)">xl</a></li>
-                                <li><a href="javascript:void(0)">2xl</a></li>
+                                <li>
+                                  <a href="javascript:void(0)">s</a>
+                                </li>
+                                <li>
+                                  <a href="javascript:void(0)">m</a>
+                                </li>
+                                <li style={{ background: "#230bb3" }}>
+                                  <a
+                                    style={{ color: "white" }}
+                                    href="javascript:void(0)"
+                                  >
+                                    l
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="javascript:void(0)">xl</a>
+                                </li>
+                                <li>
+                                  <a href="javascript:void(0)">2xl</a>
+                                </li>
                               </ul>
                             </div>
                           </div>
@@ -226,25 +315,72 @@ function Productdetailstwo() {
                             <h6 className="product-title mt-3">quantity</h6>
                             <div className="qty-box">
                               <div className="input-group">
-                                <button><i className="fa-solid fa-minus" style={{ color: "#230bb3" }} /></button>
-                                <input className="qty-adj form-control" type="number" style={{ width: "50px" }} readOnly value={2} />
-                                <button><i className="fa-solid fa-plus" style={{ color: "#230bb3" }} /></button>
+                                <button>
+                                  <i
+                                    className="fa-solid fa-minus"
+                                    style={{ color: "#230bb3" }}
+                                  />
+                                </button>
+                                <input
+                                  className="qty-adj form-control"
+                                  type="number"
+                                  style={{ width: "50px" }}
+                                  readOnly
+                                  value={2}
+                                />
+                                <button>
+                                  <i
+                                    className="fa-solid fa-plus"
+                                    style={{ color: "#230bb3" }}
+                                  />
+                                </button>
                               </div>
                             </div>
                           </div>
-                          <div className="productdetailcontainer customwidth endline d-flex" style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                          <div
+                            className="productdetailcontainer customwidth endline d-flex"
+                            style={{
+                              flexDirection: "column",
+                              justifyContent: "center",
+                            }}
+                          >
                             <h6 className="product-title"></h6>
-                            <div className="product-buttons" style={{ paddingTop: "4px" }} >
-                              <a href="javascript:void(0)" style={{ background: '#230bb3', padding: "9px 9px" }} id="cartEffect" className="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                            <div
+                              className="product-buttons"
+                              style={{ paddingTop: "4px" }}
+                            >
+                              <a
+                                href="javascript:void(0)"
+                                style={{
+                                  background: "#230bb3",
+                                  padding: "9px 9px",
+                                }}
+                                id="cartEffect"
+                                className="btn cart-btn btn-normal tooltip-top"
+                                data-tippy-content="Add to cart"
+                              >
                                 <i className="fa fa-shopping-cart" />
                                 add to cart
                               </a>
-                              <a href="javascript:void(0)" style={{ fontSize: '14px', background: "none", color: '#230bb3', padding: '13px 8px' }} className="btn btn-normal add-to-wish tooltip-top" data-tippy-content="Add to wishlist">
-                                <i style={{ color: "#230bb3", fontSize: '20px' }} className="fa fa-heart" aria-hidden="true" />
+                              <a
+                                href="javascript:void(0)"
+                                style={{
+                                  fontSize: "14px",
+                                  background: "none",
+                                  color: "#230bb3",
+                                  padding: "13px 8px",
+                                }}
+                                className="btn btn-normal add-to-wish tooltip-top"
+                                data-tippy-content="Add to wishlist"
+                              >
+                                <i
+                                  style={{ color: "#230bb3", fontSize: "20px" }}
+                                  className="fa fa-heart"
+                                  aria-hidden="true"
+                                />
                               </a>
                             </div>
                           </div>
-
 
                           {/* <div className="productdetailcontainer w-100 d-flex" style={{justifyContent:"space-between",flexWrap:"wrap"}}> */}
 
@@ -259,56 +395,234 @@ function Productdetailstwo() {
                           </div>
                         </div>
                         </div> */}
-                          <div className="productdetailcontainer w-lg-50 w-xs-100 d-flex" style={{ flexDirection: 'column', alignItems: 'end', justifyContent: 'center' }}>
-
+                          <div
+                            className="productdetailcontainer w-lg-50 w-xs-100 d-flex"
+                            style={{
+                              flexDirection: "column",
+                              alignItems: "end",
+                              justifyContent: "center",
+                            }}
+                          >
                             <div className="pro-group">
-                              <h6 className="product-title endlinetext">Deliver To <img src="./images/icon/place.png" alt="404" /> </h6>
+                              <h6 className="product-title endlinetext">
+                                Deliver To{" "}
+                                <img src="./images/icon/place.png" alt="404" />{" "}
+                              </h6>
                               <div className="delivery-detail">
                                 <div className="delivery-detail-contian">
                                   <div className="input-group">
                                     {/* <span className="input-group-text"><i className="" /></span> */}
-                                    <input type="text" className="form-control makeitsmall" style={{ padding: "0px 0.75rem" }} placeholder="Enter Pincode for delivery" />
+                                    <input
+                                      type="text"
+                                      className="form-control makeitsmall"
+                                      style={{ padding: "0px 0.75rem" }}
+                                      placeholder="Enter Pincode for delivery"
+                                    />
                                   </div>
-                                  <a href="javascript:void(0)" style={{ background: "#CFCFCF", borderRadius: "3px" }} className="btn btn-solid btn-md ">Check</a>
+                                  <a
+                                    href="javascript:void(0)"
+                                    style={{
+                                      background: "#CFCFCF",
+                                      borderRadius: "3px",
+                                    }}
+                                    className="btn btn-solid btn-md "
+                                  >
+                                    Check
+                                  </a>
                                 </div>
-                                <p>Delivery by 17 Oct, Tuesday |  <li style={{ color: '#230BB3', fontWeight: "700", fontSize: "16px" }}><span style={{color: '#CFCFCF'}}>Free</span>  ₹40</li></p>
-
-
+                                <p>
+                                  Delivery by 17 Oct, Tuesday |{" "}
+                                  <li
+                                    style={{
+                                      color: "#230BB3",
+                                      fontWeight: "700",
+                                      fontSize: "16px",
+                                    }}
+                                  >
+                                    <span style={{ color: "#CFCFCF" }}>
+                                      Free
+                                    </span>{" "}
+                                    ₹40
+                                  </li>
+                                </p>
                               </div>
                             </div>
                           </div>
-
 
                           {/* </div> */}
 
                           <div className="productdetailcontainer w-100">
                             <h5 className="product-title ">Description</h5>
-                            <p style={{ color: "#8F9091", fontSize: "12px" }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                            <p style={{ color: "#8F9091", fontSize: "12px" }}>
+                              Lorem Ipsum is simply dummy text of the printing
+                              and typesetting industry. Lorem Ipsum has been the
+                              industry's standard dummy text ever since the
+                              1500s, when an unknown printer took a galley of
+                              type and scrambled it to make a type specimen
+                              book. It has survived not only five centuries, but
+                              also the leap into electronic typesetting,
+                              remaining essentially unchanged.{" "}
+                            </p>
                           </div>
-
                         </div>
-
                       </div>
 
-                      <div className="product-right " style={{ marginTop: "20px", boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)", borderRadius: '10px', padding: "20px 17px" }}>
-                        <div id="selectSize" className="pro-group addeffect-section product-description border-product d-flex" style={{ flexWrap: "wrap", justifyContent: "space-between" }}>
+                      <div
+                        className="product-right "
+                        style={{
+                          marginTop: "20px",
+                          boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)",
+                          borderRadius: "10px",
+                          padding: "20px 17px",
+                        }}
+                      >
+                        <div
+                          id="selectSize"
+                          className="pro-group addeffect-section product-description border-product d-flex"
+                          style={{
+                            flexWrap: "wrap",
+                            justifyContent: "space-between",
+                          }}
+                        >
                           <div className="productdetailcontainer w-100">
                             <h5 className="product-title ">Product Details</h5>
-                            <p style={{ color: "#8F9091", fontSize: "12px" }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-                            <p style={{ display: "flex", color: "#000", fontSize: "12px", fontWeight: "600", paddingTop: "5px" }}> <span style={{ color: "#000", display: "block", width: "75px", fontSize: "12px", fontWeight: "600" }}> Febric </span> <span style={{ color: "#8F9091" }}>Chiffon</span></p>
-                            <p style={{ display: "flex", color: "#000", fontSize: "12px", fontWeight: "600", paddingTop: "5px" }}> <span style={{ color: "#000", display: "block", width: "75px", fontSize: "12px", fontWeight: "600" }}> Color </span> <span style={{ color: "#8F9091" }}>Red</span></p>
-                            <p style={{ display: "flex", color: "#000", fontSize: "12px", fontWeight: "600", paddingTop: "5px" }}> <span style={{ color: "#000", display: "block", width: "75px", fontSize: "12px", fontWeight: "600" }}> Material </span> <span style={{ color: "#8F9091" }}>Crepe printed</span></p>
-                            <p style={{ display: "flex", color: "#000", fontSize: "12px", fontWeight: "600", paddingTop: "5px" }}> <span style={{ color: "#000", display: "block", width: "75px", fontSize: "12px", fontWeight: "600" }}> Length </span> <span style={{ color: "#8F9091" }}>50 Inches</span></p>
-                            <p style={{ display: "flex", color: "#000", fontSize: "12px", fontWeight: "600", paddingTop: "5px" }}> <span style={{ color: "#000", display: "block", width: "75px", fontSize: "12px", fontWeight: "600" }}> Size </span> <span style={{ color: "#8F9091" }}>Large</span></p>
-
-
+                            <p style={{ color: "#8F9091", fontSize: "12px" }}>
+                              Lorem Ipsum is simply dummy text of the printing
+                              and typesetting industry. Lorem Ipsum has been the
+                              industry's standard dummy text ever since the
+                              1500s, when an unknown printer took a galley of
+                              type and scrambled it to make a type specimen
+                              book. It has survived not only five centuries, but
+                              also the leap into electronic typesetting,
+                              remaining essentially unchanged.{" "}
+                            </p>
+                            <p
+                              style={{
+                                display: "flex",
+                                color: "#000",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                paddingTop: "5px",
+                              }}
+                            >
+                              {" "}
+                              <span
+                                style={{
+                                  color: "#000",
+                                  display: "block",
+                                  width: "75px",
+                                  fontSize: "12px",
+                                  fontWeight: "600",
+                                }}
+                              >
+                                {" "}
+                                Febric{" "}
+                              </span>{" "}
+                              <span style={{ color: "#8F9091" }}>Chiffon</span>
+                            </p>
+                            <p
+                              style={{
+                                display: "flex",
+                                color: "#000",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                paddingTop: "5px",
+                              }}
+                            >
+                              {" "}
+                              <span
+                                style={{
+                                  color: "#000",
+                                  display: "block",
+                                  width: "75px",
+                                  fontSize: "12px",
+                                  fontWeight: "600",
+                                }}
+                              >
+                                {" "}
+                                Color{" "}
+                              </span>{" "}
+                              <span style={{ color: "#8F9091" }}>Red</span>
+                            </p>
+                            <p
+                              style={{
+                                display: "flex",
+                                color: "#000",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                paddingTop: "5px",
+                              }}
+                            >
+                              {" "}
+                              <span
+                                style={{
+                                  color: "#000",
+                                  display: "block",
+                                  width: "75px",
+                                  fontSize: "12px",
+                                  fontWeight: "600",
+                                }}
+                              >
+                                {" "}
+                                Material{" "}
+                              </span>{" "}
+                              <span style={{ color: "#8F9091" }}>
+                                Crepe printed
+                              </span>
+                            </p>
+                            <p
+                              style={{
+                                display: "flex",
+                                color: "#000",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                paddingTop: "5px",
+                              }}
+                            >
+                              {" "}
+                              <span
+                                style={{
+                                  color: "#000",
+                                  display: "block",
+                                  width: "75px",
+                                  fontSize: "12px",
+                                  fontWeight: "600",
+                                }}
+                              >
+                                {" "}
+                                Length{" "}
+                              </span>{" "}
+                              <span style={{ color: "#8F9091" }}>
+                                50 Inches
+                              </span>
+                            </p>
+                            <p
+                              style={{
+                                display: "flex",
+                                color: "#000",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                paddingTop: "5px",
+                              }}
+                            >
+                              {" "}
+                              <span
+                                style={{
+                                  color: "#000",
+                                  display: "block",
+                                  width: "75px",
+                                  fontSize: "12px",
+                                  fontWeight: "600",
+                                }}
+                              >
+                                {" "}
+                                Size{" "}
+                              </span>{" "}
+                              <span style={{ color: "#8F9091" }}>Large</span>
+                            </p>
                           </div>
-
                         </div>
-
                       </div>
-
-
 
                       {/* <div className="product-right " style={{ marginTop: "20px", boxShadow: "0px 14px 40px 0px rgba(0, 0, 0, 0.12)", borderRadius: '10px', padding: "20px 17px" }}>
                         <div id="selectSize" className="pro-group addeffect-section product-description border-product d-flex" style={{ flexWrap: "wrap", justifyContent: "space-between" }}>
@@ -333,19 +647,6 @@ function Productdetailstwo() {
                         </div>
 
                       </div> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                   </div>
                 </div>
@@ -462,31 +763,57 @@ function Productdetailstwo() {
           <div className="row">
             <div className="col-12 product">
               <div className="product-slide-6 product-m no-arrow">
-                <OwlCarousel className="owl-theme" style={{ width: '100%', height: '100%' }} {...options5}>
+                <OwlCarousel
+                  className="owl-theme"
+                  style={{ width: "100%", height: "100%" }}
+                  {...options5}
+                >
                   <div>
                     <div className="product-box">
                       <div className="product-imgbox">
                         <div className="product-front">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/1.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/1.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-back">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/a1.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/a1.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-icon icon-inline">
-                          <button data-bs-toggle="modal" data-bs-target="#addtocart" className="tooltip-top" data-tippy-content="Add to cart">
+                          <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#addtocart"
+                            className="tooltip-top"
+                            data-tippy-content="Add to cart"
+                          >
                             <AiOutlineShoppingCart size={45} />
                           </button>
-                          <a href="javascript:void(0)" className="add-to-wish tooltip-top" data-tippy-content="Add to Wishlist">
+                          <a
+                            href="javascript:void(0)"
+                            className="add-to-wish tooltip-top"
+                            data-tippy-content="Add to Wishlist"
+                          >
                             <AiOutlineHeart size={45} />
                           </a>
-                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" className="tooltip-top" data-tippy-content="Quick View">
+                          <a
+                            href="javascript:void(0)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quick-view"
+                            className="tooltip-top"
+                            data-tippy-content="Quick View"
+                          >
                             <AiOutlineEye size={45} />
                           </a>
-
                         </div>
                       </div>
                       <div className="product-detail detail-inline ">
@@ -500,19 +827,13 @@ function Productdetailstwo() {
                               <i className="fa fa-star" />
                             </div>
                             <a href="product-page(left-sidebar).html">
-                              <h6 className="price-title">
-                                sony xperia m5
-                              </h6>
+                              <h6 className="price-title">sony xperia m5</h6>
                             </a>
                           </div>
                           <div className="detail-right">
-                            <div className="check-price">
-                              ₹ 56.21
-                            </div>
+                            <div className="check-price">₹ 56.21</div>
                             <div className="price">
-                              <div className="price">
-                                ₹ 24.05
-                              </div>
+                              <div className="price">₹ 24.05</div>
                             </div>
                           </div>
                         </div>
@@ -524,25 +845,47 @@ function Productdetailstwo() {
                       <div className="product-imgbox">
                         <div className="product-front">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/3.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/3.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-back">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/a3.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/a3.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-icon icon-inline">
-                          <button data-bs-toggle="modal" data-bs-target="#addtocart" className="tooltip-top" data-tippy-content="Add to cart">
+                          <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#addtocart"
+                            className="tooltip-top"
+                            data-tippy-content="Add to cart"
+                          >
                             <AiOutlineShoppingCart size={45} />
                           </button>
-                          <a href="javascript:void(0)" className="add-to-wish tooltip-top" data-tippy-content="Add to Wishlist">
+                          <a
+                            href="javascript:void(0)"
+                            className="add-to-wish tooltip-top"
+                            data-tippy-content="Add to Wishlist"
+                          >
                             <AiOutlineHeart size={45} />
                           </a>
-                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" className="tooltip-top" data-tippy-content="Quick View">
+                          <a
+                            href="javascript:void(0)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quick-view"
+                            className="tooltip-top"
+                            data-tippy-content="Quick View"
+                          >
                             <AiOutlineEye size={45} />
                           </a>
-
                         </div>
                       </div>
                       <div className="product-detail detail-inline">
@@ -556,19 +899,13 @@ function Productdetailstwo() {
                               <i className="fa fa-star" />
                             </div>
                             <a href="product-page(left-sidebar).html">
-                              <h6 className="price-title">
-                                woman hande bag
-                              </h6>
+                              <h6 className="price-title">woman hande bag</h6>
                             </a>
                           </div>
                           <div className="detail-right">
-                            <div className="check-price">
-                              ₹ 56.21
-                            </div>
+                            <div className="check-price">₹ 56.21</div>
                             <div className="price">
-                              <div className="price">
-                                ₹ 24.05
-                              </div>
+                              <div className="price">₹ 24.05</div>
                             </div>
                           </div>
                         </div>
@@ -580,25 +917,47 @@ function Productdetailstwo() {
                       <div className="product-imgbox">
                         <div className="product-front">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/4.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/4.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-back">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/a4.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/a4.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-icon icon-inline">
-                          <button data-bs-toggle="modal" data-bs-target="#addtocart" className="tooltip-top" data-tippy-content="Add to cart">
+                          <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#addtocart"
+                            className="tooltip-top"
+                            data-tippy-content="Add to cart"
+                          >
                             <AiOutlineShoppingCart size={45} />
                           </button>
-                          <a href="javascript:void(0)" className="add-to-wish tooltip-top" data-tippy-content="Add to Wishlist">
+                          <a
+                            href="javascript:void(0)"
+                            className="add-to-wish tooltip-top"
+                            data-tippy-content="Add to Wishlist"
+                          >
                             <AiOutlineHeart size={45} />
                           </a>
-                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" className="tooltip-top" data-tippy-content="Quick View">
+                          <a
+                            href="javascript:void(0)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quick-view"
+                            className="tooltip-top"
+                            data-tippy-content="Quick View"
+                          >
                             <AiOutlineEye size={45} />
                           </a>
-
                         </div>
                       </div>
                       <div className="product-detail detail-inline">
@@ -612,19 +971,13 @@ function Productdetailstwo() {
                               <i className="fa fa-star" />
                             </div>
                             <a href="product-page(left-sidebar).html">
-                              <h6 className="price-title">
-                                nikon camera
-                              </h6>
+                              <h6 className="price-title">nikon camera</h6>
                             </a>
                           </div>
                           <div className="detail-right">
-                            <div className="check-price">
-                              ₹ 60.21
-                            </div>
+                            <div className="check-price">₹ 60.21</div>
                             <div className="price">
-                              <div className="price">
-                                ₹ 20.05
-                              </div>
+                              <div className="price">₹ 20.05</div>
                             </div>
                           </div>
                         </div>
@@ -636,25 +989,47 @@ function Productdetailstwo() {
                       <div className="product-imgbox">
                         <div className="product-front">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/5.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/5.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-back">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/a5.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/a5.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-icon icon-inline">
-                          <button data-bs-toggle="modal" data-bs-target="#addtocart" className="tooltip-top" data-tippy-content="Add to cart">
+                          <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#addtocart"
+                            className="tooltip-top"
+                            data-tippy-content="Add to cart"
+                          >
                             <AiOutlineShoppingCart size={45} />
                           </button>
-                          <a href="javascript:void(0)" className="add-to-wish tooltip-top" data-tippy-content="Add to Wishlist">
+                          <a
+                            href="javascript:void(0)"
+                            className="add-to-wish tooltip-top"
+                            data-tippy-content="Add to Wishlist"
+                          >
                             <AiOutlineHeart size={45} />
                           </a>
-                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" className="tooltip-top" data-tippy-content="Quick View">
+                          <a
+                            href="javascript:void(0)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quick-view"
+                            className="tooltip-top"
+                            data-tippy-content="Quick View"
+                          >
                             <AiOutlineEye size={45} />
                           </a>
-
                         </div>
                       </div>
                       <div className="product-detail detail-inline">
@@ -668,19 +1043,13 @@ function Productdetailstwo() {
                               <i className="fa fa-star" />
                             </div>
                             <a href="product-page(left-sidebar).html">
-                              <h6 className="price-title">
-                                lenovo laptop
-                              </h6>
+                              <h6 className="price-title">lenovo laptop</h6>
                             </a>
                           </div>
                           <div className="detail-right">
-                            <div className="check-price">
-                              ₹ 70.21
-                            </div>
+                            <div className="check-price">₹ 70.21</div>
                             <div className="price">
-                              <div className="price">
-                                ₹ 30.05
-                              </div>
+                              <div className="price">₹ 30.05</div>
                             </div>
                           </div>
                         </div>
@@ -692,25 +1061,47 @@ function Productdetailstwo() {
                       <div className="product-imgbox">
                         <div className="product-front">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/6.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/6.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-back">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/a6.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/a6.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-icon icon-inline">
-                          <button data-bs-toggle="modal" data-bs-target="#addtocart" className="tooltip-top" data-tippy-content="Add to cart">
+                          <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#addtocart"
+                            className="tooltip-top"
+                            data-tippy-content="Add to cart"
+                          >
                             <AiOutlineShoppingCart size={45} />
                           </button>
-                          <a href="javascript:void(0)" className="add-to-wish tooltip-top" data-tippy-content="Add to Wishlist">
+                          <a
+                            href="javascript:void(0)"
+                            className="add-to-wish tooltip-top"
+                            data-tippy-content="Add to Wishlist"
+                          >
                             <AiOutlineHeart size={45} />
                           </a>
-                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" className="tooltip-top" data-tippy-content="Quick View">
+                          <a
+                            href="javascript:void(0)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quick-view"
+                            className="tooltip-top"
+                            data-tippy-content="Quick View"
+                          >
                             <AiOutlineEye size={45} />
                           </a>
-
                         </div>
                       </div>
                       <div className="product-detail detail-inline">
@@ -730,13 +1121,9 @@ function Productdetailstwo() {
                             </a>
                           </div>
                           <div className="detail-right">
-                            <div className="check-price">
-                              ₹ 100.21
-                            </div>
+                            <div className="check-price">₹ 100.21</div>
                             <div className="price">
-                              <div className="price">
-                                ₹ 80.05
-                              </div>
+                              <div className="price">₹ 80.05</div>
                             </div>
                           </div>
                         </div>
@@ -748,25 +1135,47 @@ function Productdetailstwo() {
                       <div className="product-imgbox">
                         <div className="product-front">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/7.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/7.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-back">
                           <a href="product-page(left-sidebar).html">
-                            <img src="./images/layout-2/product/a7.jpg" className="img-fluid  " alt="product" />
+                            <img
+                              src="./images/layout-2/product/a7.jpg"
+                              className="img-fluid  "
+                              alt="product"
+                            />
                           </a>
                         </div>
                         <div className="product-icon icon-inline">
-                          <button data-bs-toggle="modal" data-bs-target="#addtocart" className="tooltip-top" data-tippy-content="Add to cart">
+                          <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#addtocart"
+                            className="tooltip-top"
+                            data-tippy-content="Add to cart"
+                          >
                             <AiOutlineShoppingCart size={45} />
                           </button>
-                          <a href="javascript:void(0)" className="add-to-wish tooltip-top" data-tippy-content="Add to Wishlist">
+                          <a
+                            href="javascript:void(0)"
+                            className="add-to-wish tooltip-top"
+                            data-tippy-content="Add to Wishlist"
+                          >
                             <AiOutlineHeart size={45} />
                           </a>
-                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" className="tooltip-top" data-tippy-content="Quick View">
+                          <a
+                            href="javascript:void(0)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#quick-view"
+                            className="tooltip-top"
+                            data-tippy-content="Quick View"
+                          >
                             <AiOutlineEye size={45} />
                           </a>
-
                         </div>
                       </div>
                       <div className="product-detail detail-inline">
@@ -780,19 +1189,13 @@ function Productdetailstwo() {
                               <i className="fa fa-star" />
                             </div>
                             <a href="product-page(left-sidebar).html">
-                              <h6 className="price-title">
-                                wooden table
-                              </h6>
+                              <h6 className="price-title">wooden table</h6>
                             </a>
                           </div>
                           <div className="detail-right">
-                            <div className="check-price">
-                              ₹ 90.21
-                            </div>
+                            <div className="check-price">₹ 90.21</div>
                             <div className="price">
-                              <div className="price">
-                                ₹ 28.05
-                              </div>
+                              <div className="price">₹ 28.05</div>
                             </div>
                           </div>
                         </div>
@@ -807,8 +1210,8 @@ function Productdetailstwo() {
       </section>
       {/* related products */}
       <Footer />
-    </ >
-  )
+    </>
+  );
 }
 
-export default Productdetailstwo
+export default Productdetailstwo;
