@@ -12,7 +12,7 @@ import { addItem } from "../store/state/cart";
 const Cart = () => {
   const nvg = useNavigate();
   const dispatch = useDispatch();
-  const globalvariable = useSelector(state => state);
+  const globalvariable = useSelector((state) => state);
   const [showtax, setshowtax] = useState(false);
   const [loading, setloading] = useState(false);
   const [vouchervalue, setvouchervalue] = useState("");
@@ -24,7 +24,6 @@ const Cart = () => {
   const [updatecart] = usePostUpdateCartMutation();
   const [deletecartitem] = useDeleteCartMutation();
 
-
   const incrementcart = async (qty, id) => {
     const data = {
       newQuantity: qty + 1,
@@ -32,7 +31,7 @@ const Cart = () => {
     };
     setloading(false);
     const response = await updatecart(data);
-    if(response.data.status === "successfully"){
+    if (response.data.status === "successfully") {
       dispatch(addItem(globalvariable.cart + 1));
     }
 
@@ -46,13 +45,13 @@ const Cart = () => {
       };
       setloading(false);
       const response = await updatecart(data);
-      if(response.data.status === "successfully"){
+      if (response.data.status === "successfully") {
         dispatch(addItem(globalvariable.cart - 1));
       }
       refetch();
     }
   };
-  const deletecart = async (id,qty) => {
+  const deletecart = async (id, qty) => {
     const response = await deletecartitem(id);
     if (response) {
       dispatch(addItem(globalvariable.cart - qty));
@@ -94,7 +93,7 @@ const Cart = () => {
       <section className="section-big-py-space b-g-light">
         <div className="container-fluid">
           <div className="row specailmargin">
-            <div className="col-md-8" style={{backgroundColor:'white'}}>
+            <div className="col-md-8" style={{ backgroundColor: "white" }}>
               <div className=" hayeveryone">
                 <div
                   class="row details  cartdesgintwo"
@@ -102,8 +101,8 @@ const Cart = () => {
                 >
                   {isLoading === true
                     ? ""
-                    : cartdata.data[0]?.product_name
-                    ? cartdata.data.map((item, index) => (
+                    : cartdata?.data[0]?.product_name
+                    ? cartdata?.data.map((item, index) => (
                         <div class="col-lg-5 py-2" style={{ width: "470px" }}>
                           <div class="card">
                             <div
@@ -136,9 +135,9 @@ const Cart = () => {
                                       lineHeight: "20px",
                                       fontWeight: "600",
                                       display: "-webkit-box",
-                                  WebkitLineClamp: "1",
-                                  WebkitBoxOrient: "vertical",
-                                  overflow: "hidden",
+                                      WebkitLineClamp: "1",
+                                      WebkitBoxOrient: "vertical",
+                                      overflow: "hidden",
                                     }}
                                   >
                                     {item.product_id === null
@@ -155,18 +154,21 @@ const Cart = () => {
                                     paddingTop: "7px",
                                   }}
                                 >
-                                  &nbsp;{item.product_id === null
-                                ? item.product_variant_id?.selling_price
-                                : item.product_id?.selling_price}
+                                  &nbsp;
+                                  {item.product_id === null
+                                    ? item.product_variant_id?.selling_price
+                                    : item.product_id?.selling_price}
                                   <span
                                     style={{
                                       color: "#c1c2c5",
                                       textDecoration: "line-through",
                                       fontSize: "11px",
                                     }}
-                                  >{item.product_id === null
-                                    ? item.product_variant_id.mrp_price
-                                    : item.product_id.mrp_price}</span>
+                                  >
+                                    {item.product_id === null
+                                      ? item.product_variant_id.mrp_price
+                                      : item.product_id.mrp_price}
+                                  </span>
                                 </h6>
                                 <div
                                   className="qty-box"
@@ -238,7 +240,7 @@ const Cart = () => {
                               style={{ color: "#059fe2" }}
                               className="remove"
                               onClick={() => {
-                                deletecart(item?._id,item?.product_qty);
+                                deletecart(item?._id, item?.product_qty);
                               }}
                             >
                               Remove
@@ -264,7 +266,7 @@ const Cart = () => {
                   Shopping Cart
                 </h3> */}
 
-                <table className="table" style={{marginTop:'5px'}}>
+                <table className="table" style={{ marginTop: "5px" }}>
                   <thead>
                     <tr>
                       <th
@@ -346,8 +348,8 @@ const Cart = () => {
                   <tbody>
                     {loading === true ? (
                       ""
-                    ) : cartdata.data[0]?.product_name ? (
-                      cartdata.data.map((item, index) => (
+                    ) : cartdata?.data[0]?.product_name ? (
+                      cartdata?.data.map((item, index) => (
                         <tr>
                           <td
                             style={{
@@ -448,7 +450,9 @@ const Cart = () => {
                                   className="form-control qty input-number"
                                   readOnly
                                   value={
-                                    item.product_qty === 0 ? 0 : item.product_qty
+                                    item.product_qty === 0
+                                      ? 0
+                                      : item.product_qty
                                   }
                                 />
                                 <button
@@ -491,7 +495,7 @@ const Cart = () => {
                             <a
                               href="javascript:void(0)"
                               onClick={() => {
-                                deletecart(item?._id,item?.product_qty);
+                                deletecart(item?._id, item?.product_qty);
                               }}
                               className="icon"
                               style={{
@@ -562,7 +566,7 @@ const Cart = () => {
                     className="family"
                     style={{ fontWeight: 600, fontSize: "12px" }}
                   >
-                    {cartdata.totalItems} Items
+                    {cartdata?.totalItems} Items
                     {/* {data.length} Items */}
                   </span>
                   <span
@@ -574,9 +578,9 @@ const Cart = () => {
                     }}
                   >
                     ₹
-                    {cartdata.total_Amount_without_discount === 0
+                    {cartdata?.total_Amount_without_discount === 0
                       ? 0.0
-                      : cartdata.total_Amount_without_discount}
+                      : cartdata?.total_Amount_without_discount}
                   </span>
                 </div>
                 <div
@@ -597,9 +601,9 @@ const Cart = () => {
                       fontSize: "12px",
                     }}
                   >
-                    {cartdata.totalDiscount === 0
+                    {cartdata?.totalDiscount === 0
                       ? `₹0.00`
-                      : `-₹${cartdata.totalDiscount}`}
+                      : `-₹${cartdata?.totalDiscount}`}
                   </span>
                 </div>
                 <div
@@ -620,7 +624,10 @@ const Cart = () => {
                       fontSize: "12px",
                     }}
                   >
-                    ₹{cartdata.shipping_charges === 0 ? `0.00` : cartdata.shipping_charges}
+                    ₹
+                    {cartdata?.shipping_charges === 0
+                      ? `0.00`
+                      : cartdata?.shipping_charges}
                   </span>
                 </div>
                 {/* <div
@@ -721,17 +728,24 @@ const Cart = () => {
                       fontSize: "12px",
                     }}
                   >
-                    {cartdata.total_Amount_with_discount === 0
+                    {cartdata?.total_Amount_with_discount === 0
                       ? "₹0.00"
-                      : `₹${cartdata.total_Amount_with_discount}`}
+                      : `₹${cartdata?.total_Amount_with_discount}`}
                   </span>
                 </div>
                 <div
                   className="firstrow px-2 d-flex justify-content-between"
                   style={{ padding: "5px 0px", paddingLeft: "20px" }}
                 >
-                  {cartdata.total_Amount_with_discount != 0 ? (
-                    <NavLink to="#" onClick={()=>{nvg('/checkout');window.location.reload();}} style={{ width: "100%" }}>
+                  {cartdata?.total_Amount_with_discount != 0 ? (
+                    <NavLink
+                      to="#"
+                      onClick={() => {
+                        nvg("/checkout");
+                        window.location.reload();
+                      }}
+                      style={{ width: "100%" }}
+                    >
                       <button
                         style={{
                           border: "none",
@@ -818,7 +832,6 @@ const Cart = () => {
         </div>
       </section>
       {/*section end*/}
-
     </>
   );
 };
