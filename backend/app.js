@@ -20,7 +20,7 @@ const cors = require("cors");
 const app = express();
 const path = require('path');
 const cloudinary = require('cloudinary');
-
+var morgan = require('morgan')
 
 const corsOptions = {
   origin: ["http://localhost:3000", "https://ecom-mern-project-admin.onrender.com"], // List allowed origins
@@ -29,6 +29,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(morgan('combined'))
 const connectdb = require("./db/connection.js");
 const { log } = require("console");
 require("./Models/contactus");
