@@ -23,7 +23,7 @@ const cloudinary = require('cloudinary');
 
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://your-frontend-production-url.com"], // List allowed origins
+  origin: ["http://localhost:3000", "https://ecom-mern-project-admin.onrender.com"], // List allowed origins
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
