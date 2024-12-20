@@ -32,7 +32,9 @@ import Orderlist from "./pages/Order/Listorder/Orderlist";
 import Editorder from "./pages/Order/Editorder/Editorder";
 import Contactlist from "./pages/Website_info/Listcontact/Contactlist";
 import Viewcontact from "./pages/Website_info/Editbanner/Viewcontact";
+console.log("process.env.REACT_APP_API_URL",process.env.REACT_APP_API_URL)
 function App() {
+
   return (
     <div className="app">
       
