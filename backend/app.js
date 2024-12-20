@@ -21,7 +21,14 @@ const app = express();
 const path = require('path');
 const cloudinary = require('cloudinary');
 
-app.use(cors())
+
+const corsOptions = {
+  origin: ["http://localhost:3000", "https://your-frontend-production-url.com"], // List allowed origins
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+};
+
+app.use(cors(corsOptions));
 const connectdb = require("./db/connection.js");
 const { log } = require("console");
 require("./Models/contactus");
