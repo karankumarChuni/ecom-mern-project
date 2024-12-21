@@ -73,6 +73,7 @@ function Productdetails() {
   const [Data23, setData] = useState([]);
   const [delresponse, setdelresponse] = useState({ status: false, msg: "" });
   const { data, isLoading, refetch } = useGetSingleProductQuery(id);
+  console.log("single product data:", data);
   const [addincart] = usePostCartItemMutation();
   const [addtowishlistapi] = usePostWishlistItemMutation();
   const [removetowishlistapi] = usePostDeleteWishlistMutation();

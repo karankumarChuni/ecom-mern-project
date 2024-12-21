@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+
 const cloudinary = require("cloudinary");
 const morgan = require("morgan");
 
@@ -30,9 +31,9 @@ const corsOptions = {
     "http://localhost:3001",
     "https://ecom-mern-project-admin.onrender.com",
     "https://ecom-mern-project-client.onrender.com",
-  ], // List allowed origins
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
@@ -61,8 +62,7 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "public")));
+// Middleware to parse request bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
@@ -82,11 +82,15 @@ app.use("/api/brand", brandrouter);
 app.use("/api/address", addressrouter);
 app.use("/api/order", orderrouter);
 
-// Redirect all unknown routes to index.html (for React Router)
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "build")));
+
+// Catch-all route to serve index.html for React's client-side routing
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running at ${port}`);
 });

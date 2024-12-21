@@ -26,7 +26,7 @@ import Termsconditions from "./pages/Termsconditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Pay from "./pages/Pay";
 import Categoryforbrand from "./pages/Category-for-brand";
-console.log("process.env.REACT_APP_API_URL",process.env.REACT_APP_API_URL)
+// console.log("process.env.REACT_APP_API_URL",process.env.REACT_APP_API_URL)
 
 function App() {
   return (
