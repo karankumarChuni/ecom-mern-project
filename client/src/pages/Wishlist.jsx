@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDeleteOutline } from "react-icons/md";
@@ -10,46 +11,66 @@ import { addwishlist } from "../store/state/wishlist";
 
 const Wishlist = () => {
   const nvg = useNavigate();
+  const dispatch = useDispatch();
+  const globalvariable = useSelector((state) => state);
+
+  // Local state for wishlist data
+  const [wishlist, setWishlist] = useState([]);
   const {
     data: wishlistdata,
     isLoading,
     refetch,
   } = useGetWishlistProductQuery();
-  console.log("wishlist data", wishlistdata);
-  const [removetowishlistapi] = usePostDeleteWishlistMutation();
-  const dispatch = useDispatch();
-  const globalvariable = useSelector((state) => state);
 
-  // redirect to pdp page
+  const [removetowishlistapi] = usePostDeleteWishlistMutation();
+
+  // Sync wishlist data with API response
+  useEffect(() => {
+    if (wishlistdata?.data) {
+      setWishlist(wishlistdata.data); // Update local state with API data
+    }
+  }, [wishlistdata]);
+
+  // Redirect to Product Details Page
   const transfer = (productid) => {
     nvg(`/productdetails/${productid}`);
   };
-  // redirect to pdp page
 
-  // Remove item from wishlist start here
+  // Remove item from Wishlist
   const removewishlist = async (data) => {
     const wishlist_value = {
-      product_id: data.product_id === null ? null : data.product_id._id,
-      item_or_variant: data.product_id === null ? "variant" : "item",
-      product_variant_id:
-        data.product_id === null ? data.product_variant_id._id : null,
+      product_id: data.product_id?._id || null,
+      item_or_variant: data.product_id ? "item" : "variant",
+      product_variant_id: data.product_variant_id?._id || null,
     };
 
-    const response = await removetowishlistapi(wishlist_value);
-    if (response.data.status === "successfully") {
-      dispatch(addwishlist(globalvariable.wishlist - 1));
-      refetch();
+    try {
+      const response = await removetowishlistapi(wishlist_value);
+      if (response.data.status === "successfully") {
+        dispatch(addwishlist(globalvariable.wishlist - 1));
+        // Update local state immediately
+        setWishlist((prev) =>
+          prev.filter(
+            (item) =>
+              item.product_id?._id !== data.product_id?._id &&
+              item.product_variant_id?._id !== data.product_variant_id?._id
+          )
+        );
+      } else {
+        console.error("Failed to remove item from wishlist", response);
+      }
+    } catch (error) {
+      console.error("Error while removing item from wishlist:", error);
     }
   };
-  // Remove item from wishlist end here
 
-  return isLoading === true ? (
+  return isLoading ? (
     <></>
   ) : (
     <>
       <Header />
 
-      {/* breadcrumb start */}
+      {/* Breadcrumb */}
       <div
         className="breadcrumb-main marginfromtop"
         style={{ backgroundColor: "#f9f9f9" }}
@@ -63,7 +84,6 @@ const Wishlist = () => {
                     <li>
                       <a href="/">home</a>
                     </li>
-                    {/* <li><i className="fa fa-angle-double-right" /></li> */}
                     <li style={{ fontSize: "12px" }}>&gt;</li>
                     <li>
                       <a href="javascript:void(0)">Wishlist</a>
@@ -75,8 +95,8 @@ const Wishlist = () => {
           </div>
         </div>
       </div>
-      {/* breadcrumb End */}
-      {/* section start */}
+
+      {/* Wishlist Section */}
       <section
         className="section-big-pt-space ratio_asos"
         style={{ background: "#f9f9f9", minHeight: "100vh" }}
@@ -89,21 +109,17 @@ const Wishlist = () => {
                   <div className="row">
                     <div className="col-sm-12">
                       <div className="collection-product-wrapper">
-                        <div className="product-top-filter">
-                          <div className="row">
-                            <div className="col-12">
-                              <div className="product-filter-content"></div>
-                            </div>
-                          </div>
-                        </div>
                         <div className="product-wrapper-grid product">
                           <div
                             className="row removepadding"
                             style={{ gap: "7px" }}
                           >
-                            {wishlistdata?.data?.[0] ? (
-                              wishlistdata.data.map((item, index) => (
-                                <div className="col-xl-3 col-md-4 col-sm-6 col-12">
+                            {wishlist.length > 0 ? (
+                              wishlist.map((item, index) => (
+                                <div
+                                  className="col-xl-3 col-md-4 col-sm-6 col-12"
+                                  key={index}
+                                >
                                   <div
                                     className="bg-white"
                                     style={{ margin: "3px 4px" }}
@@ -118,26 +134,29 @@ const Wishlist = () => {
                                             position: "relative",
                                           }}
                                         >
-                                          {" "}
                                           <img
                                             src={
-                                              item.product_id != null
-                                                ? item?.product_id
-                                                    .product_image1?.url
-                                                : item?.product_variant_id
-                                                    .product_image1
+                                              item.product_id?.product_image1 ||
+                                              item.product_variant_id
+                                                ?.product_image1 ||
+                                              "default-image-url"
                                             }
                                             onClick={() => {
-                                              transfer(
-                                                item.product_id === null
-                                                  ? item.product_variant_id
-                                                      .product_id
-                                                  : item.product_id._id
-                                              );
+                                              const productId =
+                                                item.product_id?._id ||
+                                                item.product_variant_id
+                                                  ?.product_id;
+                                              if (productId) {
+                                                transfer(productId);
+                                              } else {
+                                                console.error(
+                                                  "Product ID not found for transfer"
+                                                );
+                                              }
                                             }}
-                                            className="img-fluid  "
+                                            className="img-fluid"
                                             alt="product"
-                                          />{" "}
+                                          />
                                           <span
                                             style={{
                                               position: "absolute",
@@ -150,7 +169,6 @@ const Wishlist = () => {
                                               removewishlist(item);
                                             }}
                                           >
-                                            {" "}
                                             <MdOutlineDeleteOutline
                                               size={25}
                                               color="#333"
@@ -168,17 +186,21 @@ const Wishlist = () => {
                                               justifyContent: "center",
                                             }}
                                           >
-                                            {" "}
                                             <button
                                               type="button"
                                               className="btn"
                                               onClick={() => {
-                                                transfer(
-                                                  item.product_id === null
-                                                    ? item.product_variant_id
-                                                        .product_id
-                                                    : item.product_id._id
-                                                );
+                                                const productId =
+                                                  item.product_id?._id ||
+                                                  item.product_variant_id
+                                                    ?.product_id;
+                                                if (productId) {
+                                                  transfer(productId);
+                                                } else {
+                                                  console.error(
+                                                    "Product ID not found for transfer"
+                                                  );
+                                                }
                                               }}
                                             >
                                               <h6
@@ -188,8 +210,9 @@ const Wishlist = () => {
                                                   fontWeight: "600",
                                                 }}
                                               >
-                                                {item?.product_name}
-                                              </h6>{" "}
+                                                {item?.product_name ||
+                                                  "Unnamed Product"}
+                                              </h6>
                                             </button>
                                           </div>
                                         </div>
@@ -210,94 +233,47 @@ const Wishlist = () => {
                                                 fontWeight: "500",
                                               }}
                                             >
-                                              {" "}
                                               ₹
-                                              {item.product_id != null
-                                                ? item?.product_id.selling_price
-                                                : item?.product_variant_id
-                                                    .selling_price}{" "}
-                                              {item.product_id === null ? (
-                                                item?.product_variant_id
-                                                  ?.discount === 0 ? (
-                                                  ""
-                                                ) : (
-                                                  <span
-                                                    style={{
-                                                      fontSize: "10px",
-                                                      color: "#c1c1c1",
-                                                      lineHeight: "20px",
-                                                      textDecoration:
-                                                        "line-through",
-                                                      paddingLeft: "3px",
-                                                      fontWeight: "400",
-                                                    }}
-                                                  >
-                                                    ₹
-                                                    {
-                                                      item.product_variant_id
-                                                        .mrp_price
-                                                    }
-                                                  </span>
-                                                )
-                                              ) : item?.product_id?.discount ===
-                                                0 ? (
-                                                ""
-                                              ) : (
+                                              {item.product_id?.selling_price ||
+                                                item.product_variant_id
+                                                  ?.selling_price ||
+                                                "N/A"}
+                                              {item.product_id?.discount >
+                                                0 && (
                                                 <span
                                                   style={{
                                                     fontSize: "10px",
                                                     color: "#c1c1c1",
-                                                    lineHeight: "20px",
                                                     textDecoration:
                                                       "line-through",
                                                     paddingLeft: "3px",
-                                                    fontWeight: "400",
                                                   }}
                                                 >
-                                                  ₹{item.product_id.mrp_price}
+                                                  ₹{item.product_id?.mrp_price}
                                                 </span>
                                               )}
-                                              {item.product_id === null ? (
-                                                <span
-                                                  style={{
-                                                    fontSize: "10px",
-                                                    color: "#230bb3",
-                                                    lineHeight: "20px",
-                                                    paddingLeft: "3px",
-                                                    fontWeight: "400",
-                                                  }}
-                                                >
-                                                  {`(${parseInt(
-                                                    ((item.product_variant_id
-                                                      .mrp_price -
-                                                      item.product_variant_id
-                                                        .selling_price) /
-                                                      item.product_variant_id
-                                                        .mrp_price) *
-                                                      100
-                                                  )} %off)`}
-                                                </span>
-                                              ) : (
-                                                <span
-                                                  style={{
-                                                    fontSize: "10px",
-                                                    color: "#230bb3",
-                                                    lineHeight: "20px",
-                                                    paddingLeft: "3px",
-                                                    fontWeight: "400",
-                                                  }}
-                                                >
-                                                  {`(${parseInt(
-                                                    ((item.product_id
-                                                      .mrp_price -
-                                                      item.product_id
-                                                        .selling_price) /
-                                                      item.product_id
-                                                        .mrp_price) *
-                                                      100
-                                                  )} %off)`}
-                                                </span>
-                                              )}
+                                              {item.product_id &&
+                                                item.product_id.mrp_price &&
+                                                item.product_id
+                                                  .selling_price && (
+                                                  <span
+                                                    style={{
+                                                      fontSize: "10px",
+                                                      color: "#230bb3",
+                                                      paddingLeft: "3px",
+                                                    }}
+                                                  >
+                                                    {`(${parseInt(
+                                                      ((item.product_id
+                                                        .mrp_price -
+                                                        item.product_id
+                                                          .selling_price) /
+                                                        item.product_id
+                                                          .mrp_price) *
+                                                        100
+                                                    )}% off)`}
+                                                  </span>
+                                                )}
                                             </div>
                                           </div>
                                         </div>
@@ -329,9 +305,6 @@ const Wishlist = () => {
           </div>
         </div>
       </section>
-      {/* section End */}
-
-      {/* <Footer /> */}
     </>
   );
 };

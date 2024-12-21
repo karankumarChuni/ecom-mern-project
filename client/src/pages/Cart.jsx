@@ -21,6 +21,7 @@ const Cart = () => {
   const [vouchererror, setvouchererror] = useState("");
 
   const { data: cartdata, isLoading, refetch } = useGetCartProductQuery();
+  console.log("cart data", cartdata);
   const [updatecart] = usePostUpdateCartMutation();
   const [deletecartitem] = useDeleteCartMutation();
 
@@ -540,7 +541,7 @@ const Cart = () => {
                     nvg("/home");
                   }}
                 >
-                  <img src="/images/Arrow 1.png" alt /> Back to Shop
+                  <img src="/images/backArrow.png" alt /> Back to Shop
                 </h5>
               </div>
             </div>
