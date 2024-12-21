@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Loginsection from "./Loginsection";
 import Registersection from "./Registersection";
 import Header from "../../components/Header/Header";
+
 const Login = () => {
   const ctl = useRef(null);
   const vtl = useRef(null);
@@ -73,6 +74,16 @@ const Login = () => {
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"
                     >
+                      {/* Demo Credentials Section */}
+                      <div className="demo-credentials text-center my-3">
+                        <p>
+                          <strong>Demo Email:</strong>{" "}
+                          <span>user@gmail.com</span>
+                          <br />
+                          <strong>Demo Password:</strong> <span>user123</span>
+                        </p>
+                      </div>
+                      {/* End of Demo Credentials Section */}
                       <Loginsection />
                     </div>
 
@@ -96,4 +107,5 @@ const Login = () => {
     </>
   );
 };
+
 export default Login;

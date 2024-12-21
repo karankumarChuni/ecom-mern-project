@@ -64,6 +64,18 @@ const Login = () => {
             <div className="d-flex justify-content-center">
               <img src={img23} style={{ width: "200px" }} alt="eieie" />
             </div>
+            {/* Demo Credentials Section */}
+            <div className="demo-credentials text-center my-3">
+              <p>
+                <strong>Demo Email:</strong> <span>admin@gmail.com</span>
+                <br />
+                <strong>Demo Password:</strong> <span>admin123</span>
+              </p>
+              {/* <p>
+                Copy and paste the above credentials to log in as a demo user.
+              </p> */}
+            </div>
+            {/* End of Demo Credentials Section */}
             <div className="flex-column">
               <label>Email </label>
             </div>
