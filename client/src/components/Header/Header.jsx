@@ -28,20 +28,26 @@ const Header = () => {
   const closesidebar = () => {
     setshowsidebar(false);
   };
-  const { data: cartcount, isLoading, refetch } = useGetCartCountQuery();
+
+  // Renamed refetch to avoid naming conflict
+  const {
+    data: cartcount,
+    isLoading,
+    refetch: refetchCart,
+  } = useGetCartCountQuery();
   const {
     data: wishlistcount,
     isLoading: wislistloading,
-    refetch: wishlistrefetch,
+    refetch: refetchWishlist,
   } = useGetWishlistCountQuery();
 
+  // Re-fetch data when the page is visited
+  useEffect(() => {
+    refetchCart(); // This is renamed refetch for cart count
+    refetchWishlist(); // This is renamed refetch for wishlist count
+  }, []); // Empty dependency array ensures it runs only on mount
+
   const transfer = (productid, pname) => {
-    // nvg(`/productdetails/${productid}`, {
-    //   // state: {
-    //   //   id: productid,
-    //   //   pname: pname,
-    //   // },
-    // });
     nvg(`/productdetails/${productid}`);
     window.location.reload();
     if (pagename === "/productdetails") {
@@ -55,20 +61,16 @@ const Header = () => {
     refetch: refetchsearch,
     isError,
   } = useGetProductBySearchQuery(serchvalue);
-  console.log("eeddeeeeeee", isError);
+
   const searchresult = async (value) => {
-    console.log("kdkdd", searchapidata);
     if (value === undefined || value === null || value === "") {
       refetchsearch();
     } else {
       refetchsearch();
-
-      // setsearchdata(response.data.data)
     }
   };
 
   useEffect(() => {
-    // Log the data to debug the response
     console.log("Cart Count:", cartcount, "Wishlist Count:", wishlistcount);
 
     // Ensure data is valid before accessing properties
@@ -89,8 +91,9 @@ const Header = () => {
   };
 
   useEffect(() => {
-    refetch();
-  }, [gobalvariable.cart]);
+    refetchCart(); // Refetch cart count whenever the cart state in Redux changes
+    refetchWishlist(); // Refetch wishlist count whenever the wishlist state in Redux changes
+  }, [gobalvariable.cart, gobalvariable.wishlist]);
 
   return (
     <header className="fixed-top" style={{ position: "fixed" }}>

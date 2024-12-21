@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +25,11 @@ const Cart = () => {
   const [updatecart] = usePostUpdateCartMutation();
   const [deletecartitem] = useDeleteCartMutation();
 
+  // Re-fetch data when the page is visited
+  useEffect(() => {
+    refetch();
+  }, []); // Empty dependency array ensures it runs only on mount
+
   const incrementcart = async (qty, id) => {
     const data = {
       newQuantity: qty + 1,
@@ -38,6 +43,7 @@ const Cart = () => {
 
     refetch();
   };
+
   const decrementcart = async (qty, id) => {
     if (qty > 1) {
       const data = {
@@ -52,6 +58,7 @@ const Cart = () => {
       refetch();
     }
   };
+
   const deletecart = async (id, qty) => {
     const response = await deletecartitem(id);
     if (response) {

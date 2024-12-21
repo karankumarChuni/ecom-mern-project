@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import {
@@ -8,6 +7,7 @@ import {
 } from "../store/api/wishlistapi";
 import { useDispatch, useSelector } from "react-redux";
 import { addwishlist } from "../store/state/wishlist";
+import Header from "../components/Header/Header";
 
 const Wishlist = () => {
   const nvg = useNavigate();
@@ -19,10 +19,15 @@ const Wishlist = () => {
   const {
     data: wishlistdata,
     isLoading,
-    refetch,
+    refetch: wishlistRefetch, // Renamed refetch to wishlistRefetch
   } = useGetWishlistProductQuery();
 
   const [removetowishlistapi] = usePostDeleteWishlistMutation();
+
+  // Re-fetch data when the page is visited
+  useEffect(() => {
+    wishlistRefetch(); // Use wishlistRefetch here
+  }, []); // Empty dependency array ensures it runs only on mount
 
   // Sync wishlist data with API response
   useEffect(() => {
@@ -47,15 +52,21 @@ const Wishlist = () => {
     try {
       const response = await removetowishlistapi(wishlist_value);
       if (response.data.status === "successfully") {
+        // Update the global wishlist count
         dispatch(addwishlist(globalvariable.wishlist - 1));
-        // Update local state immediately
-        setWishlist((prev) =>
-          prev.filter(
-            (item) =>
-              item.product_id?._id !== data.product_id?._id &&
-              item.product_variant_id?._id !== data.product_variant_id?._id
-          )
+
+        // Update local wishlist state
+        const updatedWishlist = wishlist.filter(
+          (item) =>
+            item.product_id?._id !== data.product_id?._id &&
+            item.product_variant_id?._id !== data.product_variant_id?._id
         );
+        setWishlist(updatedWishlist);
+
+        // If the updated local state is empty, refetch server data for confirmation
+        if (updatedWishlist.length === 0) {
+          await wishlistRefetch(); // Ensure server sync
+        }
       } else {
         console.error("Failed to remove item from wishlist", response);
       }
