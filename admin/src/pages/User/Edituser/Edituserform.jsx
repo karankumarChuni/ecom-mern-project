@@ -2,7 +2,10 @@ import React from "react";
 import Loadercomp from "../../../components/Loadercomp";
 import { Field, Form, Formik } from "formik";
 import { Categoryvalidationedit } from "../Validation/Categoryvalidationedit";
-import { useGetSingleUserQuery, usePatchUserMutation } from "../../../store/api/userapi";
+import {
+  useGetSingleUserQuery,
+  usePatchUserMutation,
+} from "../../../store/api/userapi";
 import { useNavigate } from "react-router-dom";
 
 const Edituserform = ({ id }) => {
@@ -20,7 +23,12 @@ const Edituserform = ({ id }) => {
           </label>
         </div>
         <div className="col-lg-8">
-          <Field name={name} type={type} className="form-control" placeholder={placeholder} />
+          <Field
+            name={name}
+            type={type}
+            className="form-control"
+            placeholder={placeholder}
+          />
         </div>
         <div className="offset-lg-4 col-lg-8">
           <FieldError name={name} />
@@ -80,8 +88,8 @@ const Edituserform = ({ id }) => {
           state: data?.data?.state || "",
           city: data?.data?.city || "",
           pincode: data?.data?.pincode || "",
-          status: data?.data?.status || "Active",
-          type: data?.data?.isAdmin || "User",
+          status: data?.data?.status || "",
+          type: data?.data?.isAdmin || "",
         }}
         validationSchema={Categoryvalidationedit}
         onSubmit={handleSubmit}
@@ -97,10 +105,27 @@ const Edituserform = ({ id }) => {
                 position: "relative",
               }}
             >
-              <FormField label="First Name" name="first_name" placeholder="First Name" />
-              <FormField label="Last Name" name="last_name" placeholder="Last Name" />
-              <FormField label="Email ID" name="email" placeholder="Email ID" type="email" />
-              <FormField label="Mobile No." name="mobile" placeholder="Mobile No." />
+              <FormField
+                label="First Name"
+                name="first_name"
+                placeholder="First Name"
+              />
+              <FormField
+                label="Last Name"
+                name="last_name"
+                placeholder="Last Name"
+              />
+              <FormField
+                label="Email ID"
+                name="email"
+                placeholder="Email ID"
+                type="email"
+              />
+              <FormField
+                label="Mobile No."
+                name="mobile"
+                placeholder="Mobile No."
+              />
               <FormField label="Address" name="address" placeholder="Address" />
               <FormField label="Country" name="country" placeholder="Country" />
               <FormField label="State" name="state" placeholder="State" />

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { gettoken } from "../../Localstorage/Store";
 
 // Debugging token retrieval
 const token = localStorage.getItem("token");
@@ -9,8 +10,9 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_URL,
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token"); // Fetch dynamically
+      const token = gettoken()?.token;
       console.log("Using token:", token); // Debug token value
+      // debugger;
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       } else {
