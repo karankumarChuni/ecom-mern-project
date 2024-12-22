@@ -82,13 +82,13 @@ app.use("/api/brand", brandrouter);
 app.use("/api/address", addressrouter);
 app.use("/api/order", orderrouter);
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "build")));
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, "build")));
 
-// Catch-all route to serve index.html for React's client-side routing
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// // Catch-all route to serve index.html for React's client-side routing
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 // Start the server
 app.listen(port, () => {
