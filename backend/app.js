@@ -32,7 +32,7 @@ const corsOptions = {
     "https://ecom-mern-project-admin.onrender.com",
     "https://ecom-mern-project-client.onrender.com",
   ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
