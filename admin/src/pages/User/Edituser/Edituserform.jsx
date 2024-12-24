@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Loadercomp from "../../../components/Loadercomp";
 import { Field, Form, Formik } from "formik";
 import { Categoryvalidationedit } from "../Validation/Categoryvalidationedit";
@@ -9,11 +9,31 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Edituserform = ({ id }) => {
-  const nvg = useNavigate();
-  const { data, isLoading } = useGetSingleUserQuery(id);
+  const navigate = useNavigate();
+  const { data, isLoading, error: fetchError } = useGetSingleUserQuery(id);
   const [patchuser] = usePatchUserMutation();
+  const [initialValues, setInitialValues] = useState(null);
 
-  // Reusable Field Component
+  // Set initial values once data is fetched
+  useEffect(() => {
+    if (data) {
+      setInitialValues({
+        first_name: data?.data?.first_name || "",
+        last_name: data?.data?.last_name || "",
+        email: data?.data?.email || "",
+        mobile: data?.data?.mobile || "",
+        address: data?.data?.address || "",
+        country: data?.data?.country || "",
+        state: data?.data?.state || "",
+        city: data?.data?.city || "",
+        pincode: data?.data?.pincode || "",
+        status: data?.data?.status || "",
+        type: data?.data?.isAdmin || "",
+      });
+    }
+  }, [data]);
+
+  // Form Field Component
   const FormField = ({ label, name, type = "text", placeholder }) => (
     <div className="col-md-6 px-2 pt-3">
       <div className="row">
@@ -37,7 +57,7 @@ const Edituserform = ({ id }) => {
     </div>
   );
 
-  // Error Display Component
+  // Field Error Display Component
   const FieldError = ({ name }) => (
     <Field name={name}>
       {({ meta: { touched, error } }) =>
@@ -47,22 +67,24 @@ const Edituserform = ({ id }) => {
   );
 
   const handleSubmit = async (values) => {
-    const formdata = new FormData();
-    Object.keys(values).forEach((key) => formdata.append(key, values[key]));
-
+    const formdata = { ...values }; // Use object if server expects JSON
     try {
       const response = await patchuser({ data: formdata, id });
-      if (!response.error) {
-        nvg("/userlist/2");
+
+      if (response?.error) {
+        console.error("Error updating user:", response.error);
+        alert("Error updating user. Please try again.");
       } else {
-        console.error("Failed to update user:", response.error.error);
+        alert("User updated successfully!");
+        navigate("/userlist/2"); // Optional navigation after success
       }
     } catch (error) {
       console.error("Unexpected error during submission:", error);
+      alert("Unexpected error. Please try again.");
     }
   };
 
-  if (isLoading) {
+  if (isLoading || !initialValues) {
     return (
       <div className="container-fluid bg-white">
         <div
@@ -75,24 +97,23 @@ const Edituserform = ({ id }) => {
     );
   }
 
+  if (fetchError) {
+    return (
+      <div className="container-fluid bg-white">
+        <p style={{ color: "red", textAlign: "center" }}>
+          Failed to fetch user data. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="container-fluid pb-4 pt-3 px-2 bg-white">
       <Formik
-        initialValues={{
-          first_name: data?.data?.first_name || "",
-          last_name: data?.data?.last_name || "",
-          email: data?.data?.email || "",
-          mobile: data?.data?.mobile || "",
-          address: data?.data?.address || "",
-          country: data?.data?.country || "",
-          state: data?.data?.state || "",
-          city: data?.data?.city || "",
-          pincode: data?.data?.pincode || "",
-          status: data?.data?.status || "",
-          type: data?.data?.isAdmin || "",
-        }}
+        initialValues={initialValues}
         validationSchema={Categoryvalidationedit}
         onSubmit={handleSubmit}
+        enableReinitialize
       >
         {({ isSubmitting }) => (
           <Form autoComplete="off">
@@ -174,7 +195,11 @@ const Edituserform = ({ id }) => {
                 className="col-12 py-5 px-4 d-flex justify-content-end"
                 style={{ gap: "4px" }}
               >
-                <button type="button" className="btn4" onClick={() => nvg(-1)}>
+                <button
+                  type="button"
+                  className="btn4"
+                  onClick={() => navigate(-1)}
+                >
                   Cancel
                 </button>
                 <button

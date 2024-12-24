@@ -2,8 +2,12 @@ const Usertable = require("../../Models/usertable");
 
 const updateuser = async (req, res) => {
   const userId = req.params.id;
+  console.log("Incoming Request:", req.body);
   try {
-    const updatedUser = await Usertable.findByIdAndUpdate(userId, req.body, { new: true });
+    const updatedUser = await Usertable.findByIdAndUpdate(userId, req.body, {
+      new: true,
+    });
+    console.log("Updated User:", updatedUser);
 
     if (!updatedUser) {
       return res.status(404).json({ status: "failed", message: "User not found" });
