@@ -1,28 +1,23 @@
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, useNavigate } from "react-router-dom";
-
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Loadercomp from "../../components/Loadercomp";
-import { useGetUserInfoQuery } from "../../store/api/userapiTwo";
+import { gettoken } from "../../Localstorage/Store";
+// import { useGetUserInfoQuery } from "../../store/api/userapiTwo";
 
 const Profiledetail = () => {
   const [srtloader, setsrtloader] = useState(false);
-  //   const {
-  //     data: userinfo,
-  //     isLoading: userloading,
-  //     refetch: refetchuserinfo,
-  //   } = useGetUserInfoQuery();
-  //   //   console.log("admin profile data:", userinfo);
+
   const [Data, setData] = useState({});
+  console.log("Admin profile data:", Data.data);
   const navigate = useNavigate(); // For navigation on unauthorized access
 
   useEffect(() => {
     async function fetchData() {
       setsrtloader(true);
-      const token = localStorage.getItem("token"); // Replace with your token key
-      console.log("abc token:", token.token);
+      const token = gettoken()?.token;
       if (!token) {
         console.error("No token found, redirecting to login.");
         return;
@@ -36,8 +31,8 @@ const Profiledetail = () => {
             Authorization: `Bearer ${token}`, // Attach token
           },
         });
-        console.log("Admin profile data:", response.data);
-        setData(response.data);
+
+        setData(response.data.data);
       } catch (error) {
         if (error.response?.status === 401) {
           console.error("Unauthorized access - redirecting to login.");
@@ -113,9 +108,7 @@ const Profiledetail = () => {
                     </label>
                   </div>
                   <div className="col-9">
-                    <p className="customcolor">
-                      {Data.first_name ? Data.first_name : ""}
-                    </p>
+                    <p className="customcolor">{Data ? Data.first_name : ""}</p>
                   </div>
                 </div>
               </div>
@@ -154,7 +147,7 @@ const Profiledetail = () => {
                   </div>
                   <div className="col-9">
                     <p className="customcolor">
-                      {Data.mobile_no ? Data.mobile_no : ""}
+                      {Data.mobile ? Data.mobile : ""}
                     </p>
                   </div>
                 </div>

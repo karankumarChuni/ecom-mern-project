@@ -1,62 +1,47 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-// Define the API
 export const userApi = createApi({
-  reducerPath: "userApi", // Name for the API slice
+  reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/user", // Base URL for the API
-    prepareHeaders: (headers) => {
-      // Retrieve the token from local storage
-      const token = localStorage.getItem("Oneuptoken");
+    baseUrl: `${process.env.REACT_APP_API_URL}/user`,
+    prepareHeaders: (headers, { getState }) => {
+      const token = localStorage.getItem("Oneuptoken"); // Retrieve the token from local storage
       if (token) {
-        console.log("Adding token to headers:", token); // Debugging token value
         headers.set("Authorization", `Bearer ${token}`);
-      } else {
-        console.warn("No token found in localStorage."); // Warn if token is missing
       }
-      return headers; // Return the headers for the request
+      return headers;
     },
   }),
   endpoints: (builder) => ({
-    // Fetch user information
     getUserInfo: builder.query({
       query: () => ({
-        url: `/userinfo`, // Endpoint URL
-        method: "GET", // HTTP method
+        url: `/userinfo`,
+        method: "GET",
       }),
-      providesTags: ["UserInfo"], // Optional tags for caching
     }),
-
-    // Register a new user
     postCreateUser: builder.mutation({
       query: (data) => ({
-        url: `/register`, // Endpoint URL
-        method: "POST", // HTTP method
-        body: data, // Data to be sent in the request body
+        url: `/register`,
+        method: "POST",
+        body: data,
       }),
     }),
-
-    // Login user
     postLoginUser: builder.mutation({
       query: (data) => ({
-        url: `/login`, // Endpoint URL
-        method: "POST", // HTTP method
-        body: data, // Data to be sent in the request body
+        url: `/login`,
+        method: "POST",
+        body: data,
       }),
     }),
-
-    // Update user data
     patchUser: builder.mutation({
       query: (data) => ({
-        url: `/`, // Endpoint URL
-        method: "PATCH", // HTTP method
-        body: data, // Data to be sent in the request body
+        url: `/`,
+        method: "PATCH",
+        body: data,
       }),
     }),
   }),
 });
 
-// Export hooks for each endpoint
 export const {
   useGetUserInfoQuery,
   usePostCreateUserMutation,
