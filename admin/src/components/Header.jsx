@@ -52,6 +52,21 @@ const Header = () => {
           ""
         )}
       </div>
+      {/* Message Section */}
+      <div style={{ flex: 1, textAlign: "center", marginTop: "8px", }}>
+        <a
+          href="https://ecom-mern-project-client.onrender.com/home"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: "none",
+            color: "yellow",
+            fontWeight: "bold",
+          }}
+        >
+          Click here To Visit our website (Client Side)
+        </a>
+      </div>
       <div style={{ display: "flex" }}>
         <div className="icongroup">
           <div style={{ width: "0px", height: "0px" }}></div>
