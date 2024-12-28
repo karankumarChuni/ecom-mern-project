@@ -31,14 +31,16 @@ const corsOptions = {
     "http://localhost:3001",
     "https://ecom-mern-project-admin.onrender.com",
     "https://ecom-mern-project-client.onrender.com",
-    "https://ecom-mern-project.vercel.app/",
-    "https://ecom-mern-project-admin.onrender.com/manifest.json"
+    "https://ecom-mern-project.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-app.use(cors(corsOptions));
+app.use(cors({
+  ...corsOptions,
+  credentials: true,
+}));
 app.use(morgan("combined"));
 
 const connectdb = require("./db/connection.js");
