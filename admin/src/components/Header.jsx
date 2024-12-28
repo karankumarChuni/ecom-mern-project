@@ -55,7 +55,7 @@ const Header = () => {
       {/* Message Section */}
       <div style={{ flex: 1, textAlign: "center", marginTop: "8px", }}>
         <a
-          href="https://ecom-mern-project-client.onrender.com/home"
+          href="https://ecom-mern-project-client.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           style={{
