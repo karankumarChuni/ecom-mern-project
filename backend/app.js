@@ -32,6 +32,7 @@ const corsOptions = {
     "https://ecom-mern-project-admin.onrender.com",
     "https://ecom-mern-project-client.onrender.com",
     "https://ecom-mern-project.vercel.app",
+    "https://ecom-mern-project-client.vercel.app"
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
