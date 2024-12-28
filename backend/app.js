@@ -31,8 +31,10 @@ const corsOptions = {
     "http://localhost:3001",
     "https://ecom-mern-project-admin.onrender.com",
     "https://ecom-mern-project-client.onrender.com",
+    "https://ecom-mern-project.vercel.app/",
+    "https://ecom-mern-project-admin.onrender.com/manifest.json"
   ],
-  methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
