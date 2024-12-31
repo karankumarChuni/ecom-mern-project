@@ -78,9 +78,9 @@ const Login = () => {
                       <div className="demo-credentials text-center my-3">
                         <p>
                           <strong>Demo Email:</strong>{" "}
-                          <span>user@gmail.com</span>
+                          <span>admin@gmail.com</span>
                           <br />
-                          <strong>Demo Password:</strong> <span>user123</span>
+                          <strong>Demo Password:</strong> <span>admin123</span>
                         </p>
                       </div>
                       {/* End of Demo Credentials Section */}
