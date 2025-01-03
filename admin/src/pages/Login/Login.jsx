@@ -55,10 +55,14 @@ const Login = () => {
 
   return (
     <div className="container loginpage d-flex justify-content-between align-items-center">
+           
       <div
         className="row d-flex justify-content-center"
         style={{ width: "100%" }}
       >
+         <p>
+                <strong>Note:</strong> <span>"Note: The project is hosted on Render,<br/> so it may take about 2 minutes to start.<br/> Please wait patiently."</span>
+              </p>
         <div className="col-8 d-flex justify-content-center">
           <form className="form" onSubmit={submitform}>
             <div className="d-flex justify-content-center">
