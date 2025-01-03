@@ -61,7 +61,7 @@ const Login = () => {
         style={{ width: "100%" }}
       >
          <p>
-                <strong>Note:</strong> <span>"Note: The project is hosted on Render,<br/> so it may take about 2 minutes to start.<br/> Please wait patiently."</span>
+                <strong>Note:</strong> <span>The project is hosted on Render,<br/> so it may take about 2 minutes to start.<br/> Please wait patiently.</span>
               </p>
         <div className="col-8 d-flex justify-content-center">
           <form className="form" onSubmit={submitform}>
